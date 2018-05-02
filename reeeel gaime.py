@@ -4,27 +4,20 @@
 import pygame, sys
 pygame.init()
 
-BackGround = pygame.image.load('4Lsd.gif')
-
 # Define some colours
 WHITE = (255, 255, 255)
 GRAY = (127, 127, 127)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
-NEON = (70, 255, 191)
-VIOLET = (127, 0, 255)
-BLOOD  = (255, 115, 60)
-PINK = (255, 96, 210)
 
-SCREENWIDTH = 400
-SCREENHEIGHT = 400
+SCREENWIDTH = 500
+SCREENHEIGHT = 500
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 
 class Button():
     """This is a class for a generic button.
-    
        txt = text on the button
        location = (x,y) coordinates of the button's centre
        action = name of function to run when button is pressed
@@ -34,13 +27,13 @@ class Button():
        font_name = name of font
        font_size = size of font
     """
-    def __init__(self, txt, location, action, bg=PINK, fg=BLACK, size=(80, 30), font_name="Segoe Print", font_size=16):
+    def __init__(self, txt, location, action, bg=WHITE, fg=BLACK, size=(80, 30), font_name="Segoe Print", font_size=16):
         self.color = bg  # the static (normal) color
         self.bg = bg  # actual background color, can change on mouseover
         self.fg = fg  # text color
         self.size = size
 
-        self.font = pygame.font.SysFont('freesansbold.ttf', 25)
+        self.font = pygame.font.SysFont(font_name, font_size)
         self.txt = txt
         self.txt_surf = self.font.render(self.txt, 1, self.fg)
         self.txt_rect = self.txt_surf.get_rect(center=[s//2 for s in self.size])
@@ -62,7 +55,7 @@ class Button():
         self.bg = self.color
         pos = pygame.mouse.get_pos()
         if self.rect.collidepoint(pos):
-            self.bg = VIOLET # mouseover color
+            self.bg = GRAY  # mouseover color
 
     def call_back(self):
         """Runs a function when clicked"""
@@ -72,15 +65,8 @@ def my_shell_function():
     """A generic function that prints something in the shell"""
     print('Fire the nukes!')
 
-def my_hello_function():
-   print('Hello!')
-
-def my_sound_function():
-    print('Sound')
-
-
-def my_settings_function():
-    """A function that advances to settings shell"""
+def my_next_function():
+    """A function that advances to the next level"""
     global level
     level += 1
 
@@ -88,14 +74,6 @@ def my_previous_function():
     """A function that retreats to the previous level"""
     global level
     level -= 1
-
-def my_on_function():
-    global level
-    print("Sound On")
-
-def my_off_function():
-    global level
-    print("Sound Off")
 
 def my_quit_function():
     """A function that will quit the game and close the pygame window"""
@@ -118,17 +96,14 @@ level = 1
 carryOn = True
 clock = pygame.time.Clock()
 
-#create button objects
-button_Hello = Button("Hello", (SCREENWIDTH/2, SCREENHEIGHT/4),my_hello_function)
-button_Previous = Button("Previous", (SCREENWIDTH/2, SCREENHEIGHT*3/4), my_previous_function)
-button_Quit = Button("Quit", (SCREENWIDTH/2, SCREENHEIGHT*3/4), my_quit_function, bg=(PINK))
-button_Settings = Button("Settings", (SCREENWIDTH/2, SCREENHEIGHT/2),my_settings_function)
-button_Sound = Button("Sound", (SCREENWIDTH/2, SCREENHEIGHT/4), my_sound_function)
-button_On = Button("ON", (SCREENWIDTH/2, SCREENHEIGHT/3), my_on_function)
-button_Off = Button("OFF", (SCREENWIDTH/2, SCREENHEIGHT/2), my_off_function)
+#create button objects and store in buttons list
+button_01 = Button("Next", (SCREENWIDTH/2, SCREENHEIGHT/3), my_next_function)
+button_02 = Button("Previous", (SCREENWIDTH/2, SCREENHEIGHT/3), my_previous_function)
+button_03 = Button("Quit", (SCREENWIDTH/2, SCREENHEIGHT*2/3), my_quit_function, bg=(50, 200, 20))
+
 #arrange button groups depending on level
-level1_buttons = [button_Settings, button_Hello, button_Quit]
-level2_buttons = [button_Sound, button_Previous,button_On, button_Off]
+level1_buttons = [button_01, button_03]
+level2_buttons = [button_02, button_03]
 
 #---------Main Program Loop----------
 while carryOn:
@@ -144,8 +119,8 @@ while carryOn:
     # --- Draw code goes here
 
     # Clear the screen to white
-    screen.fill(PINK)
-    screen.blit(BackGround,(0,0))
+    screen.fill(WHITE)
+
     # Draw buttons
     if level == 1:
         for button in level1_buttons:
