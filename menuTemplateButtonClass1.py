@@ -11,8 +11,8 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
-SCREENWIDTH = 500
-SCREENHEIGHT = 500
+SCREENWIDTH = 120
+SCREENHEIGHT = 100
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 
