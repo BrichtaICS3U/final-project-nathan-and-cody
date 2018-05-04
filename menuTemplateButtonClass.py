@@ -1,11 +1,11 @@
-# Menu template with button class and basic menu navigation
+ # Menu template with button class and basic menu navigation
 # Adapted from http://www.dreamincode.net/forums/topic/401541-buttons-and-sliders-in-pygame/
 
 import pygame, sys
 pygame.init()
 
-BackGround = pygame.image.load('4Lsd.gif')
-
+BackGround = pygame.image.load('lamborgini-egoista-36475.jpg')
+Sound = pygame.mixer_music.load('Tokyo Drift - Teriyaki Boyz [ MUSIC VIDEO ] HD.mp3')
 # Define some colours
 WHITE = (255, 255, 255)
 GRAY = (127, 127, 127)
@@ -16,9 +16,10 @@ NEON = (70, 255, 191)
 VIOLET = (127, 0, 255)
 BLOOD  = (255, 115, 60)
 PINK = (255, 96, 210)
+DGRAY = (45, 45, 45)
+SCREENWIDTH = 800
 
-SCREENWIDTH = 400
-SCREENHEIGHT = 400
+SCREENHEIGHT = 507
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 
@@ -30,11 +31,12 @@ class Button():
        action = name of function to run when button is pressed
        bg = background colour (default is white)
        fg = text colour (default is black)
+
        size = (width, height) of button
        font_name = name of font
        font_size = size of font
     """
-    def __init__(self, txt, location, action, bg=PINK, fg=BLACK, size=(80, 30), font_name="Segoe Print", font_size=16):
+    def __init__(self, txt, location, action, bg=DGRAY, fg=WHITE, size=(80, 30), font_name="Segoe Print", font_size=16):
         self.color = bg  # the static (normal) color
         self.bg = bg  # actual background color, can change on mouseover
         self.fg = fg  # text color
@@ -62,7 +64,7 @@ class Button():
         self.bg = self.color
         pos = pygame.mouse.get_pos()
         if self.rect.collidepoint(pos):
-            self.bg = VIOLET # mouseover color
+            self.bg = GRAY # mouseover color
 
     def call_back(self):
         """Runs a function when clicked"""
@@ -72,8 +74,8 @@ def my_shell_function():
     """A generic function that prints something in the shell"""
     print('Fire the nukes!')
 
-def my_hello_function():
-   print('Hello!')
+def my_race_function():
+   print('Race!')
 
 def my_sound_function():
     print('Sound')
@@ -119,15 +121,15 @@ carryOn = True
 clock = pygame.time.Clock()
 
 #create button objects
-button_Hello = Button("Hello", (SCREENWIDTH/2, SCREENHEIGHT/4),my_hello_function)
+button_Race = Button("Race", (SCREENWIDTH/2, SCREENHEIGHT/4),my_race_function)
 button_Previous = Button("Previous", (SCREENWIDTH/2, SCREENHEIGHT*3/4), my_previous_function)
-button_Quit = Button("Quit", (SCREENWIDTH/2, SCREENHEIGHT*3/4), my_quit_function, bg=(PINK))
+button_Quit = Button("Quit", (SCREENWIDTH/2, SCREENHEIGHT*3/4), my_quit_function, bg=(DGRAY))
 button_Settings = Button("Settings", (SCREENWIDTH/2, SCREENHEIGHT/2),my_settings_function)
 button_Sound = Button("Sound", (SCREENWIDTH/2, SCREENHEIGHT/4), my_sound_function)
 button_On = Button("ON", (SCREENWIDTH/2, SCREENHEIGHT/3), my_on_function)
 button_Off = Button("OFF", (SCREENWIDTH/2, SCREENHEIGHT/2), my_off_function)
 #arrange button groups depending on level
-level1_buttons = [button_Settings, button_Hello, button_Quit]
+level1_buttons = [button_Settings, button_Race, button_Quit]
 level2_buttons = [button_Sound, button_Previous,button_On, button_Off]
 
 #---------Main Program Loop----------
@@ -144,7 +146,7 @@ while carryOn:
     # --- Draw code goes here
 
     # Clear the screen to white
-    screen.fill(PINK)
+    screen.fill(WHITE)
     screen.blit(BackGround,(0,0))
     # Draw buttons
     if level == 1:
