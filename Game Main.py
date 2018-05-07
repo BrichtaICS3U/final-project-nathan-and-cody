@@ -4,6 +4,8 @@
 import pygame, sys
 pygame.init()
 from buttonClass import Button
+from trackClass import Track
+from carClass import Player
 
 BackGround = pygame.image.load('lamborgini-egoista-36475.jpg')
 Sound = pygame.mixer_music.load('Tokyo Drift - Teriyaki Boyz [ MUSIC VIDEO ] HD.mp3')
@@ -27,6 +29,13 @@ SCREENHEIGHT = 507
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 
+colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK)
+
+#all_sprites_list = pygame.sprite.Group()
+ 
+#playerPlayer = Player(RED, 60, 80, 70)
+#playerPlayer.rect.x = 160
+#playerPlayer.rect.y = SCREENHEIGHT - 100
 
 def my_shell_function():
     """A generic function that prints something in the shell"""
@@ -52,7 +61,11 @@ def my_settings_function():
 def my_previous_function():
     """A function that retreats to the previous level"""
     global level
-    level -= 1
+    if level ==2:
+        level -= 1
+    elif level == 3:
+        level -=2
+    print('Previous')
 
 def my_on_function():
    global music_playing
@@ -82,6 +95,10 @@ def mousebuttondown(level):
         for button in level2_buttons:
             if button.rect.collidepoint(pos):
                 button.call_back()
+    elif level == 3:
+        for button in level3_buttons:
+            if button.rect.collidepoint(pos):
+                button.call_back()
 
 level = 1
 carryOn = True
@@ -101,7 +118,7 @@ button_trackThree = Button("Track Three",  (SCREENWIDTH*2/3, SCREENHEIGHT/2), GR
 #arrange button groups depending on level
 level1_buttons = [button_Settings, button_Play, button_Quit]
 level2_buttons = [button_Previous,button_On, button_Off]
-level3_buttons = [button_trackOne, button_trackTwo, button_trackThree]
+level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
 
 #---------Main Program Loop----------
 while carryOn:
@@ -135,6 +152,9 @@ while carryOn:
     elif level == 3:
         for button in level3_buttons:
             button.draw()
+        font = pygame.font.SysFont('Segoe Print', 40)
+        text = font.render("Pick a Track", 1, (WHITE))
+        screen.blit(text, (300, 1))
             
 
     # Update the screen with queued shapes

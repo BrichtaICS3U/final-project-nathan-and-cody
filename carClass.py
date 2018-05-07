@@ -1,3 +1,5 @@
+import pygame
+pygame.init()
 BLACK = (0, 0, 0)
 GRAY = (100, 100, 100)
 WHITE = (255, 255, 255)
