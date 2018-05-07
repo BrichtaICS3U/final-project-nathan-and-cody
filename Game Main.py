@@ -9,9 +9,20 @@ from carClass import Player
 
 BackGround = pygame.image.load('lamborgini-egoista-36475.jpg')
 Sound = pygame.mixer_music.load('Tokyo Drift - Teriyaki Boyz [ MUSIC VIDEO ] HD.mp3')
+
+
+playlist = list()
+playlist.append ('Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
+playlist.append ('Lil Uzi Vert, Quavo & Travis Scott - Go Off (from The Fate of the Furious_ The Album) MUSIC VID.mp3')
+playlist.append ('PnB Rock, Kodak Black  A Boogie  Horses (from The Fate of the Furious The Album) [OFFICIAL AUDIO].mp3')
+playlist.append ('Darude - Sandstorm.mp30')
+
+
 pygame.mixer.music.play()
 music_playing = True
+
 # Define some colours
+
 WHITE = (255, 255, 255)
 GREY = (127, 127, 127)
 BLACK = (0, 0, 0)
@@ -21,7 +32,10 @@ NEON = (70, 255, 191)
 VIOLET = (127, 0, 255)
 BLOOD  = (255, 115, 60)
 PINK = (255, 96, 210)
+DGRAY = (45, 45, 45)
+YELLOW = (250, 255, 0)
 DGREY = (45, 45, 45)
+
 
 SCREENWIDTH = 800
 SCREENHEIGHT = 507
