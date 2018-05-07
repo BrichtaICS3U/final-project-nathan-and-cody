@@ -137,11 +137,11 @@ while carryOn:
     if level == 1:
         for button in level1_buttons:
             button.draw()
-        font = pygame.font.SysFont('Segoe Print', 40)
+        font = pygame.font.SysFont('magneto', 60)
         text = font.render("Top Speed", 1, (WHITE))
-        screen.blit(text, (300, 1))
+        screen.blit(text, (250, 1))
     elif level == 2:
-        font = pygame.font.SysFont('Segoe Print', 40)
+        font = pygame.font.SysFont('magneto', 40)
         text = font.render("Sound", 1, (WHITE))
         screen.blit(text, (330, 1))
         for button in level2_buttons:
