@@ -15,7 +15,16 @@ playlist = []
 playlist.append ('Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
 playlist.append ('Lil Uzi Vert, Quavo & Travis Scott - Go Off (from The Fate of the Furious_ The Album) MUSIC VID.mp3')
 playlist.append ('PnB Rock, Kodak Black  A Boogie  Horses (from The Fate of the Furious The Album) [OFFICIAL AUDIO].mp3')
+<<<<<<< HEAD
 #playlist.append ('Darude - Sandstorm.mp30')
+=======
+playlist.append ('Darude - Sandstorm.mp30')
+
+
+Sound = pygame.mixer_music.load(playlist[random.randint(0,3)])
+
+
+>>>>>>> 4e5b0b76b82d5146cf7bf2c3a6c40e5883ad49b3
 
 Sound = pygame.mixer_music.load(playlist[random.randint(0,2)])
 pygame.mixer.music.play()
@@ -215,7 +224,7 @@ while carryOn:
     elif level == 3:
         for button in level3_buttons:
             button.draw()
-        font = pygame.font.SysFont('Segoe Print', 40)
+        font = pygame.font.SysFont('magneto', 40)
         text = font.render("Pick a Track", 1, (WHITE))
         screen.blit(text, (300, 1))
 
@@ -236,5 +245,12 @@ pygame.quit()
 
 
 
+<<<<<<< HEAD
 
 
+=======
+ # pygame.draw.rect(screen, GREEN, [55, 300, 300, 70], 0)
+
+  #  pygame.draw.ellipse(screen, BLACK, [100, 110, 600, 300], 0)
+   # pygame.draw.ellipse(screen, GREY,[180, 160, 450, 200], 0)
+>>>>>>> 4e5b0b76b82d5146cf7bf2c3a6c40e5883ad49b3
