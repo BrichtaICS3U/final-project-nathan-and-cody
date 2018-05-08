@@ -1,15 +1,8 @@
 import pygame
 pygame.init()
-BLACK = (0, 0, 0)
-GRAY = (100, 100, 100)
 WHITE = (255, 255, 255)
-GREEN = (0, 200, 0)
-BRIGHT_GREEN = (0, 255, 0)
-RED = (200, 0, 0)
-BRIGHT_RED = (255, 0, 0)
-BLUE = (0,0,200)
-BRIGHT_BLUE=(0,0,255)
-class Player():
+
+class Player(pygame.sprite.Sprite):
 
     def __init__(self, colour, width, height, speed):
 
@@ -17,7 +10,7 @@ class Player():
 
         self.image = pygame.Surface([width, height])
         self.image.fill(WHITE)
-        self.image.set_colourkey(WHITE)
+        self.image.set_colorkey(WHITE)
 
         self.width = width
         self.height = height

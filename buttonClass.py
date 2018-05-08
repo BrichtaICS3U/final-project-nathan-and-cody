@@ -30,7 +30,7 @@ class Button():
        font_name = name of font
        font_size = size of font
     """
-    def __init__(self, txt, location, ac, action, bg=WHITE, fg=WHITE, size=(100, 40), font_name="centurygothic", font_size=16):
+    def __init__(self, txt, location, ac, action, bg=WHITE, fg=WHITE, size=(110, 40), font_name="centurygothic", font_size=16):
         self.color = bg  # the static (normal) color
         self.bg = bg  # actual background color, can change on mouseover
         self.fg = fg  # text color
