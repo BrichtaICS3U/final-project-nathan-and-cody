@@ -15,9 +15,10 @@ playlist = []
 playlist.append ('Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
 playlist.append ('Lil Uzi Vert, Quavo & Travis Scott - Go Off (from The Fate of the Furious_ The Album) MUSIC VID.mp3')
 playlist.append ('PnB Rock, Kodak Black  A Boogie  Horses (from The Fate of the Furious The Album) [OFFICIAL AUDIO].mp3')
+playlist.append ('Rick Astley - Never Gonna Give You Up (Video).mp3')
 #playlist.append ('Darude - Sandstorm.mp30')
 
-Sound = pygame.mixer_music.load(playlist[random.randint(0,2)])
+Sound = pygame.mixer_music.load(playlist[random.randint(0,3)])
 pygame.mixer.music.play()
 
 music_playing = True
@@ -165,6 +166,9 @@ level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, butto
 level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
 level4_buttons = [button_trackOne]
 
+
+#Lap Counter
+lap = 1
 #---------Main Program Loop----------
 while carryOn:
     # --- Main event loop ---
@@ -205,27 +209,33 @@ while carryOn:
         #MOVE THE TRACK, NOT THE SPRITE!!
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            player.moveLeft(2)
+            player.moveLeft(3)
         if keys[pygame.K_a]:
-            player.moveLeft(2)
+            player.moveLeft(3)
         if keys[pygame.K_RIGHT]:
-            player.moveRight(2)
+            player.moveRight(3)
         if keys[pygame.K_d]:
-            player.moveRight(2)
+            player.moveRight(3)
         if keys[pygame.K_UP]:
-            player.moveForward(2)
+            player.moveForward(3)
         if keys[pygame.K_w]:
-            player.moveForward(2)
+            player.moveForward(3)
         if keys[pygame.K_DOWN]:
-            player.moveBackward(2)
+            player.moveBackward(3)
         if keys[pygame.K_s]:
-            player.moveBackward(2)
+            player.moveBackward(3)
+
+        if player.rect.x > SCREENWIDTH/2 and player.rect.x < SCREENWIDTH/2+5 and player.rect.y < SCREENHEIGHT/2:
+            lap += 1
+    
         screen.fill(GREEN)
         pygame.draw.ellipse(screen, BLACK, [100, 110, 600, 300], 0)
         pygame.draw.ellipse(screen, GREY, [180, 160, 450, 200], 0)
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
-        
+        font = pygame.font.SysFont('Segoe Print', 40)
+        text = font.render("Lap"+str(lap), 1, (WHITE))
+        screen.blit(text, (300, 1))
 
             
 
