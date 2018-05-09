@@ -1,6 +1,8 @@
 import pygame
 pygame.init()
 WHITE = (255, 255, 255)
+GREY = (127, 127, 127)
+BLACK = (0, 0, 0)
 
 class Player(pygame.sprite.Sprite):
 
@@ -27,11 +29,11 @@ class Player(pygame.sprite.Sprite):
     def moveLeft(self, pixels):
         self.rect.x -= pixels
  
-    def moveForward(self, speed):
-        self.rect.y += self.speed * speed / 20
+    def moveForward(self, pixels):
+        self.rect.y -= pixels
  
-    def moveBackward(self, speed):
-        self.rect.y -= self.speed * speed / 20
+    def moveBackward(self, pixels):
+        self.rect.y += pixels
  
     def changeSpeed(self, speed):
         self.speed = speed

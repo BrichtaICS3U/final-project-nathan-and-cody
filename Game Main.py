@@ -15,16 +15,7 @@ playlist = []
 playlist.append ('Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
 playlist.append ('Lil Uzi Vert, Quavo & Travis Scott - Go Off (from The Fate of the Furious_ The Album) MUSIC VID.mp3')
 playlist.append ('PnB Rock, Kodak Black  A Boogie  Horses (from The Fate of the Furious The Album) [OFFICIAL AUDIO].mp3')
-<<<<<<< HEAD
 #playlist.append ('Darude - Sandstorm.mp30')
-=======
-playlist.append ('Darude - Sandstorm.mp30')
-
-
-Sound = pygame.mixer_music.load(playlist[random.randint(0,3)])
-
-
->>>>>>> 4e5b0b76b82d5146cf7bf2c3a6c40e5883ad49b3
 
 Sound = pygame.mixer_music.load(playlist[random.randint(0,2)])
 pygame.mixer.music.play()
@@ -51,7 +42,7 @@ DGREY = (45, 45, 45)
 
 
 SCREENWIDTH = 800
-SCREENHEIGHT = 507
+SCREENHEIGHT = 500
 
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
@@ -61,31 +52,12 @@ colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK)
 
 all_sprites_list = pygame.sprite.Group()
  
-playerPlayer = Player(RED, 60, 80, 70)
-playerPlayer.rect.x = 160
-playerPlayer.rect.y = SCREENHEIGHT - 100
+player = Player(RED, 10, 10, 0)
+player.rect.x = 160
+player.rect.y = SCREENHEIGHT/2
 
-car1 = Player(VIOLET, 60, 60, 70)
-car1.rect.x = 60
-car1.rect.y = -100
- 
-car2 = Player(PINK, 60, 60, 70)
-car2.rect.x = 160
-car2.rect.y = -600
- 
-car3 = Player(NEON, 60, 60, 70)
-car3.rect.x = 260
-car3.rect.y = -300
- 
-car4 = Player(BLUE, 60, 60, 70)
-car4.rect.x = 360
-car4.rect.y = -900
+all_sprites_list.add(player)
 
-all_sprites_list.add(playerPlayer)
-all_sprites_list.add(car1)
-all_sprites_list.add(car2)
-all_sprites_list.add(car3)
-all_sprites_list.add(car4)
 
 
 def my_shell_function():
@@ -165,6 +137,7 @@ def mousebuttondown(level):
         for button in level4_buttons:
             if button.rect.collidepoint(pos):
                 button.call_back()
+        all_sprites_list.update()
                 
 level = 1
 carryOn = True
@@ -224,14 +197,36 @@ while carryOn:
     elif level == 3:
         for button in level3_buttons:
             button.draw()
-        font = pygame.font.SysFont('magneto', 40)
+        font = pygame.font.SysFont('Segoe Print', 40)
         text = font.render("Pick a Track", 1, (WHITE))
         screen.blit(text, (300, 1))
 
     elif level == 4:
-        screen.fill(WHITE)
-        for button in level4_buttons:
-            button.draw()
+        #MOVE THE TRACK, NOT THE SPRITE!!
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            player.moveLeft(2)
+        if keys[pygame.K_a]:
+            player.moveLeft(2)
+        if keys[pygame.K_RIGHT]:
+            player.moveRight(2)
+        if keys[pygame.K_d]:
+            player.moveRight(2)
+        if keys[pygame.K_UP]:
+            player.moveForward(2)
+        if keys[pygame.K_w]:
+            player.moveForward(2)
+        if keys[pygame.K_DOWN]:
+            player.moveBackward(2)
+        if keys[pygame.K_s]:
+            player.moveBackward(2)
+        screen.fill(GREEN)
+        pygame.draw.ellipse(screen, BLACK, [100, 110, 600, 300], 0)
+        pygame.draw.ellipse(screen, GREY, [180, 160, 450, 200], 0)
+        all_sprites_list.update()       
+        all_sprites_list.draw(screen)
+        
+
             
 
     # Update the screen with queued shapes
@@ -245,12 +240,5 @@ pygame.quit()
 
 
 
-<<<<<<< HEAD
 
 
-=======
- # pygame.draw.rect(screen, GREEN, [55, 300, 300, 70], 0)
-
-  #  pygame.draw.ellipse(screen, BLACK, [100, 110, 600, 300], 0)
-   # pygame.draw.ellipse(screen, GREY,[180, 160, 450, 200], 0)
->>>>>>> 4e5b0b76b82d5146cf7bf2c3a6c40e5883ad49b3
