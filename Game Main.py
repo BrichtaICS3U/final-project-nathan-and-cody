@@ -1,7 +1,5 @@
  # Menu template with button class and basic menu navigation
 # Adapted from http://www.dreamincode.net/forums/topic/401541-buttons-and-sliders-in-pygame/
-# Help from https://github.com/rasmaxim
-
 
 import pygame, sys, random
 pygame.init()
@@ -15,11 +13,14 @@ playlist = []
 playlist.append ('Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
 playlist.append ('Lil Uzi Vert, Quavo & Travis Scott - Go Off (from The Fate of the Furious_ The Album) MUSIC VID.mp3')
 playlist.append ('PnB Rock, Kodak Black  A Boogie  Horses (from The Fate of the Furious The Album) [OFFICIAL AUDIO].mp3')
-#playlist.append ('Darude - Sandstorm.mp30')
+playlist.append ('Darude - Sandstorm.mp30')
 
-Sound = pygame.mixer_music.load(playlist[random.randint(0,2)])
+
+Sound = pygame.mixer_music.load(playlist[random.randint(0,3)])
+
+
+
 pygame.mixer.music.play()
-
 music_playing = True
 
 # Define some colours
@@ -42,34 +43,26 @@ DGREY = (45, 45, 45)
 
 
 SCREENWIDTH = 800
-SCREENHEIGHT = 500
+SCREENHEIGHT = 507
 
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 
 colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK)
 
-
-all_sprites_list = pygame.sprite.Group()
+#all_sprites_list = pygame.sprite.Group()
  
-player = Player(RED, 10, 10, 0)
-player.rect.x = 160
-player.rect.y = SCREENHEIGHT/2
-
-all_sprites_list.add(player)
-
-
+#playerPlayer = Player(RED, 60, 80, 70)
+#playerPlayer.rect.x = 160
+#playerPlayer.rect.y = SCREENHEIGHT - 100
 
 def my_shell_function():
     """A generic function that prints something in the shell"""
     print('Fire the nukes!')
 
 def my_play_function():
-    global level
-    if level == 1:
-       level += 2
-    elif level == 3:
-        level += 1
+   global level
+   level +=2
 
 def my_track_function():
     global level
@@ -95,18 +88,17 @@ def my_previous_function():
         level -=2
 
 def my_on_function():
-    global music_playing
-    if music_playing == False:
+   global music_playing
+   if music_playing == False:
         pygame.mixer.music.unpause()
         music_playing = True
-    print('Sound On')
 
 def my_off_function():
     global music_playing
     if music_playing == True:
         pygame.mixer.music.pause()
         music_playing = False
-    print('Sound Off')
+
 def my_quit_function():
     """A function that will quit the game and close the pygame window"""
     pygame.quit()
@@ -114,8 +106,7 @@ def my_quit_function():
 
 def my_change_song_function():
     global sound
-    Sound = pygame.mixer_music.load(playlist[random.randint(0,2)])
-    print(playlist)
+    Sound = pygame.mixer_music.load(playlist[random.randint(0,3)])
 
 def mousebuttondown(level):
     """A function that checks which button was pressed"""
@@ -133,12 +124,6 @@ def mousebuttondown(level):
             if button.rect.collidepoint(pos):
                 button.call_back()
 
-    elif level == 4:
-        for button in level4_buttons:
-            if button.rect.collidepoint(pos):
-                button.call_back()
-        all_sprites_list.update()
-                
 level = 1
 carryOn = True
 clock = pygame.time.Clock()
@@ -151,19 +136,17 @@ button_Quit = Button("Quit", (SCREENWIDTH/2, SCREENHEIGHT*3/4), GREY, my_quit_fu
 button_Settings = Button("Settings", (SCREENWIDTH/2, SCREENHEIGHT/2), GREY, my_settings_function, DGREY)
 button_On = Button("ON", (SCREENWIDTH/4, SCREENHEIGHT/6), B_GREEN, my_on_function, GREEN)
 button_Off = Button("OFF", (SCREENWIDTH*3/4, SCREENHEIGHT/6), RED, my_off_function, BLOOD)
-button_colourRED = Button("RED", (SCREENWIDTH*1/3, SCREENHEIGHT*3/4), GREY, my_colour_change_function, DGREY)
-button_colourBLUE = Button("BLUE", (SCREENWIDTH/2, SCREENHEIGHT*3/4), GREY, my_colour_change_function, DGREY)
+button_colourRED = Button("RED", (SCREENWIDTH*1/3, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 button_songchange = Button("Change Song", (SCREENWIDTH/2, SCREENHEIGHT*6/10), GREY, my_change_song_function, DGREY)
 
-button_trackOne = Button("Track One", (SCREENWIDTH/3, SCREENHEIGHT/2), GREY, my_play_function, DGREY)
+button_trackOne = Button("Track One", (SCREENWIDTH/3, SCREENHEIGHT/2), GREY, my_quit_function, DGREY)
 button_trackTwo = Button("Track Two",  (SCREENWIDTH/2, SCREENHEIGHT/2), GREY, my_quit_function, DGREY)
 button_trackThree = Button("Track Three",  (SCREENWIDTH*2/3, SCREENHEIGHT/2), GREY, my_quit_function, DGREY)
 
 #arrange button groups depending on level
 level1_buttons = [button_Settings, button_Play, button_Quit]
-level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_songchange, button_colourBLUE]
+level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_songchange]
 level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
-level4_buttons = [button_trackOne]
 
 #---------Main Program Loop----------
 while carryOn:
@@ -185,11 +168,11 @@ while carryOn:
     if level == 1:
         for button in level1_buttons:
             button.draw()
-        font = pygame.font.SysFont('Magneto', 40)
+        font = pygame.font.SysFont('magneto', 60)
         text = font.render("Top Speed", 1, (WHITE))
-        screen.blit(text, (300, 1))
+        screen.blit(text, (250, 1))
     elif level == 2:
-        font = pygame.font.SysFont('Segoe Print', 40)
+        font = pygame.font.SysFont('magneto', 40)
         text = font.render("Sound", 1, (WHITE))
         screen.blit(text, (330, 1))
         for button in level2_buttons:
@@ -197,36 +180,9 @@ while carryOn:
     elif level == 3:
         for button in level3_buttons:
             button.draw()
-        font = pygame.font.SysFont('Segoe Print', 40)
+        font = pygame.font.SysFont('magneto', 40)
         text = font.render("Pick a Track", 1, (WHITE))
         screen.blit(text, (300, 1))
-
-    elif level == 4:
-        #MOVE THE TRACK, NOT THE SPRITE!!
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            player.moveLeft(2)
-        if keys[pygame.K_a]:
-            player.moveLeft(2)
-        if keys[pygame.K_RIGHT]:
-            player.moveRight(2)
-        if keys[pygame.K_d]:
-            player.moveRight(2)
-        if keys[pygame.K_UP]:
-            player.moveForward(2)
-        if keys[pygame.K_w]:
-            player.moveForward(2)
-        if keys[pygame.K_DOWN]:
-            player.moveBackward(2)
-        if keys[pygame.K_s]:
-            player.moveBackward(2)
-        screen.fill(GREEN)
-        pygame.draw.ellipse(screen, BLACK, [100, 110, 600, 300], 0)
-        pygame.draw.ellipse(screen, GREY, [180, 160, 450, 200], 0)
-        all_sprites_list.update()       
-        all_sprites_list.draw(screen)
-        
-
             
 
     # Update the screen with queued shapes
@@ -240,5 +196,8 @@ pygame.quit()
 
 
 
-
-
+   # pygame.draw.ellipse(screen, YELLOW, [100, 110, 600, 300], 3)
+   # pygame.draw.rect(screen, GREEN, [55, 300, 300, 70], 0)
+   # pygame.draw.ellipse(screen, WHITE, [140, 135, 525, 250], 1)
+   # pygame.draw.ellipse(screen, BLACK, [100, 110, 600, 300], 0)
+   # pygame.draw.ellipse(screen, GREY,[180, 160, 450, 200], 0)
