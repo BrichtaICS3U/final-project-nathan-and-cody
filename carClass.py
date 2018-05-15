@@ -6,7 +6,7 @@ BLACK = (0, 0, 0)
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, colour, width, height, speed):
+    def __init__(self, colour, width, height, speedx, speedy):
 
         super().__init__()
 
@@ -17,7 +17,8 @@ class Player(pygame.sprite.Sprite):
         self.width = width
         self.height = height
         self.colour = colour
-        self.speed = speed
+        self.speedx = speedx
+        self.speedy = speedy
 
         pygame.draw.rect(self.image, self.colour, [0, 0, self.width, self.height])
 

@@ -7,6 +7,8 @@ from buttonClass import Button
 #from trackClass import Track
 from carClass import Player
 BackGround = pygame.image.load('lamborgini-egoista-36475.jpg')
+Road_Atlanta = pygame.image.load('Road_Atlanta.png')
+Oval_Track = pygame.image.load("Oval_Track.png")
 
 
 playlist = []
@@ -14,7 +16,7 @@ playlist.append ('Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
 playlist.append ('Lil Uzi Vert, Quavo & Travis Scott - Go Off (from The Fate of the Furious_ The Album) MUSIC VID.mp3')
 playlist.append ('PnB Rock, Kodak Black  A Boogie  Horses (from The Fate of the Furious The Album) [OFFICIAL AUDIO].mp3')
 playlist.append ('Rick Astley - Never Gonna Give You Up (Video).mp3')
-#playlist.append ('Darude - Sandstorm.mp30')
+playlist.append ('Darude - Sandstorm.mp3')
 
 Sound = pygame.mixer_music.load(playlist[random.randint(0,3)])
 pygame.mixer.music.play()
@@ -50,7 +52,7 @@ colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK)
 
 all_sprites_list = pygame.sprite.Group()
  
-player = Player(RED, 10, 10, 0)
+player = Player(RED, 10, 10, 0, 0)
 player.rect.x = 160
 player.rect.y = SCREENHEIGHT - 100
 
@@ -157,6 +159,8 @@ level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, butto
 level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
 
 #Background Coordinates
+global bx
+global by
 bx = 0
 by = 0
 #Lap Counter
@@ -177,27 +181,7 @@ while carryOn:
     # Clear the screen to white
     screen.fill(WHITE)
     screen.blit(BackGround,(0,0))
-    # Draw buttons/
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
-        player.moveLeft(3)
-    if keys[pygame.K_a]:
-        player.moveLeft(3)
-    if keys[pygame.K_RIGHT]:
-        player.moveRight(3)
-    if keys[pygame.K_d]:
-        player.moveRight(3)
-    if keys[pygame.K_UP]:
-        player.moveForward(3)
-    if keys[pygame.K_w]:
-        player.moveForward(3)
-    if keys[pygame.K_DOWN]:
-        player.moveBackward(3)
-    if keys[pygame.K_s]:
-        player.moveBackward(3)
-
-    if player.rect.x > SCREENWIDTH/2 and player.rect.x < SCREENWIDTH/2+5 and player.rect.y < SCREENHEIGHT/2:
-        lap += 1
+    # Draw buttons/  
     if level == 1:
         for button in level1_buttons:
             button.draw()
@@ -218,7 +202,27 @@ while carryOn:
         screen.blit(text, (300, 1))
 
     elif level == 4:
-        #MOVE THE TRACK, NOT THE SPRITE!!   
+        if player.rect.x > SCREENWIDTH/2 and player.rect.x < SCREENWIDTH/2+5 and player.rect.y < SCREENHEIGHT/2:
+            lap += 1
+        #MOVE THE TRACK, NOT THE SPRITE!!
+            keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            player.moveLeft(3)
+        if keys[pygame.K_a]:
+            player.moveLeft(3)
+        if keys[pygame.K_RIGHT]:
+            player.moveRight(3)
+        if keys[pygame.K_d]:
+            player.moveRight(3)
+        if keys[pygame.K_UP]:
+            player.moveForward(3)
+        if keys[pygame.K_w]:
+            player.moveForward(3)
+        if keys[pygame.K_DOWN]:
+            player.moveBackward(3)
+        if keys[pygame.K_s]:
+            player.moveBackward(3)
+
         screen.fill(GREEN)
         pygame.draw.ellipse(screen, BLACK, [100, 110, 600, 300], 0)
         pygame.draw.ellipse(screen, GREY, [180, 160, 450, 200], 0)
@@ -229,12 +233,47 @@ while carryOn:
         screen.blit(text, (300, 1))
         
     elif level == 5:
-        screen.fill(GREEN)
-        pygame.draw.ellipse(screen, YELLOW, [100, 110, 600, 300], 3)
-        pygame.draw.rect(screen, GREEN, [55, 300, 300, 70], 0)
-        pygame.draw.ellipse(screen, WHITE, [140, 135, 525, 250], 1)
-        pygame.draw.ellipse(screen, BLACK, [100, 110, 600, 300], 0)
-        pygame.draw.ellipse(screen, GREY,[180, 160, 450, 200], 0)
+        if bx < -3100 and bx > -3105 and by > -1900:
+            lap += 1
+        screen.fill(WHITE)
+        screen.blit(Oval_Track,(bx, by))
+        print(bx, by)
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            player.speedx += 1
+            #bx += player.speed
+        if keys[pygame.K_a]:
+            player.speedx += 1
+           # bx += player.speed          
+        if keys[pygame.K_RIGHT]:
+            player.speedx -= 1
+           # bx += player.speed  
+        if keys[pygame.K_d]:
+            player.speedx -= 1
+           # bx += player.speed
+        if keys[pygame.K_UP]:
+            player.speedy += 1
+           # by += player.speed   
+        if keys[pygame.K_w]:
+            player.speedy += 1
+          #  by += player.speed  
+        if keys[pygame.K_DOWN]:
+            player.speedy -= 1
+         #   by += player.speed
+        if keys[pygame.K_s]:
+            player.speedy -= 1
+          #  by += player.speed
+        if keys[pygame.K_SPACE]:
+            player.speedy = 0
+            player.speedx = 0
+
+        bx += player.speedx
+        by += player.speedy
+
+        player.speedx *= 0.99
+        player.speedy *= 0.99
+        player.rect.x = SCREENWIDTH/2
+        player.rect.y = SCREENHEIGHT/2
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
         font = pygame.font.SysFont('Segoe Print', 40)
@@ -242,52 +281,52 @@ while carryOn:
         screen.blit(text, (300, 1))
         
     elif level == 6:
-        #global bx, by
-        BackGround = pygame.image.load('Road_Atlanta.png')
+        if bx < -1250 and bx > -1350 and by > -2250:
+            lap += 1
         screen.fill(WHITE)
-        screen.blit(BackGround,(by,bx))
+        screen.blit(Road_Atlanta,(bx, by))
         print(bx, by)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            if bx < 0:
-                bx = 0
-            else:
-                bx += 1
+            player.speedx += 1
+            #bx += player.speed
         if keys[pygame.K_a]:
-            if bx < 0:
-                bx = 0
-            else:
-                bx += 1            
+            player.speedx += 1
+           # bx += player.speed          
         if keys[pygame.K_RIGHT]:
-            if bx < 0:
-                bx = 0
-            else:
-                bx -= 1  
+            player.speedx -= 1
+           # bx += player.speed  
         if keys[pygame.K_d]:
-            if bx < 0:
-                bx = 0
-            else:
-                bx -= 1  
+            player.speedx -= 1
+           # bx += player.speed
         if keys[pygame.K_UP]:
-            if by < 0:
-                by = 0
-            else:
-                bx += 1  
+            player.speedy += 1
+           # by += player.speed   
         if keys[pygame.K_w]:
-            if by < 0:
-                by = 0
-            else:
-                bx += 1 
+            player.speedy += 1
+          #  by += player.speed  
         if keys[pygame.K_DOWN]:
-            if by < 0:
-                by = 0
-            else:
-                bx -= 1 
+            player.speedy -= 1
+         #   by += player.speed
         if keys[pygame.K_s]:
-            if by < 0:
-                by = 0
-            else:
-                bx -= 1 
+            player.speedy -= 1
+          #  by += player.speed
+        if keys[pygame.K_SPACE]:
+            player.speedy = 0
+            player.speedx = 0
+
+        bx += player.speedx
+        by += player.speedy
+
+        player.speedx *= 0.99
+        player.speedy *= 0.99
+        player.rect.x = SCREENWIDTH/2
+        player.rect.y = SCREENHEIGHT/2
+        all_sprites_list.update()       
+        all_sprites_list.draw(screen)
+        font = pygame.font.SysFont('Segoe Print', 40)
+        text = font.render("Lap"+str(lap), 1, (WHITE))
+        screen.blit(text, (300, 1))
     # Update the screen with queued shapes
     pygame.display.flip()
 
