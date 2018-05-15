@@ -41,6 +41,7 @@ PINK = (255, 96, 210)
 DGRAY = (45, 45, 45)
 YELLOW = (250, 255, 0)
 DGREY = (45, 45, 45)
+PINK = (237, 54, 176)
 
 
 SCREENWIDTH = 800
@@ -49,7 +50,7 @@ SCREENHEIGHT = 507
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 
-colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK)
+colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK, YELLOW)
 
 all_sprites_list = pygame.sprite.Group()
  
@@ -147,8 +148,12 @@ button_Quit = Button("Quit", (SCREENWIDTH/2, SCREENHEIGHT*3/4), GREY, my_quit_fu
 button_Settings = Button("Settings", (SCREENWIDTH/2, SCREENHEIGHT/2), GREY, my_settings_function, DGREY)
 button_On = Button("ON", (SCREENWIDTH/4, SCREENHEIGHT/6), B_GREEN, my_on_function, GREEN)
 button_Off = Button("OFF", (SCREENWIDTH*3/4, SCREENHEIGHT/6), RED, my_off_function, BLOOD)
-button_colourRED = Button("RED", (SCREENWIDTH*1/3, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
-button_songchange = Button("Change Song", (SCREENWIDTH/2, SCREENHEIGHT*6/10), GREY, my_change_song_function, DGREY)
+button_songchange = Button("Change Song", (SCREENWIDTH/2, SCREENHEIGHT*5/10), GREY, my_change_song_function, DGREY)
+
+
+button_colourRED = Button("RED", (SCREENWIDTH*1/4, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/4, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+button_colourYELLOW = Button("YELLOW", (SCREENWIDTH*3/4, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 
 button_trackOne = Button("Track One", (SCREENWIDTH/3, SCREENHEIGHT/2), GREY, my_track1_function, DGREY)
 button_trackTwo = Button("Track Two",  (SCREENWIDTH/2, SCREENHEIGHT/2), GREY, my_track2_function, DGREY)
@@ -156,7 +161,7 @@ button_trackThree = Button("Track Three",  (SCREENWIDTH*2/3, SCREENHEIGHT/2), GR
 
 #arrange button groups depending on level
 level1_buttons = [button_Settings, button_Play, button_Quit]
-level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_songchange]
+level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_colourBLUE, button_colourYELLOW, button_songchange]
 level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
 
 #Background Coordinates
@@ -186,9 +191,9 @@ while carryOn:
     if level == 1:
         for button in level1_buttons:
             button.draw()
-        font = pygame.font.SysFont('magneto', 60)
+        font = pygame.font.SysFont('magneto', 75)
         text = font.render("Top Speed", 1, (WHITE))
-        screen.blit(text, (250, 1))
+        screen.blit(text, (190, 1))
     elif level == 2:
         font = pygame.font.SysFont('magneto', 40)
         text = font.render("Sound", 1, (WHITE))
@@ -327,7 +332,7 @@ while carryOn:
         player.rect.y = SCREENHEIGHT/2
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
-        font = pygame.font.SysFont('Segoe Print', 40)
+        font = pygame.font.SysFont('magneto', 40)
         text = font.render("Lap"+str(lap), 1, (WHITE))
         screen.blit(text, (300, 1))
     # Update the screen with queued shapes
