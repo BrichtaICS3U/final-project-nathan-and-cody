@@ -13,10 +13,11 @@ Oval_Track = pygame.image.load("Oval_Track.png")
 
 playlist = []
 playlist.append ('Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
-playlist.append ('Lil Uzi Vert, Quavo & Travis Scott - Go Off (from The Fate of the Furious_ The Album) MUSIC VID.mp3')
-playlist.append ('PnB Rock, Kodak Black  A Boogie  Horses (from The Fate of the Furious The Album) [OFFICIAL AUDIO].mp3')
+playlist.append ('Lil Uzi Vert Ft. Quavo & Travis Scott- Go Off (Clean) (1).mp3')
+playlist.append ('PnB Rock- Horses (Clean).mp3')
 playlist.append ('Rick Astley - Never Gonna Give You Up (Video).mp3')
 playlist.append ('Darude - Sandstorm.mp3')
+playlist.append ('Legend Has It Clean - Run The Jewels.mp3')
 
 Sound = pygame.mixer_music.load(playlist[random.randint(0,3)])
 pygame.mixer.music.play()
@@ -226,9 +227,11 @@ while carryOn:
         screen.fill(GREEN)
         pygame.draw.ellipse(screen, BLACK, [100, 110, 600, 300], 0)
         pygame.draw.ellipse(screen, GREY, [180, 160, 450, 200], 0)
+        pygame.draw.ellipse(screen, WHITE, [140, 135, 525, 250], 1)
+        pygame.draw.ellipse(screen, YELLOW, [100, 110, 600, 300], 3)
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
-        font = pygame.font.SysFont('Segoe Print', 40)
+        font = pygame.font.SysFont('magneto', 40)
         text = font.render("Lap"+str(lap), 1, (WHITE))
         screen.blit(text, (300, 1))
         
@@ -276,7 +279,7 @@ while carryOn:
         player.rect.y = SCREENHEIGHT/2
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
-        font = pygame.font.SysFont('Segoe Print', 40)
+        font = pygame.font.SysFont('magneto', 40)
         text = font.render("Lap"+str(lap), 1, (WHITE))
         screen.blit(text, (300, 1))
         

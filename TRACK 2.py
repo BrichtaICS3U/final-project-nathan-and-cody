@@ -48,14 +48,19 @@ while carryOn:
     screen.fill(GREEN)
 
     # Queue different shapes and lines to be drawn
-    # pygame.draw.rect(screen, GREEN, [55, 300, 300, 70], 0)
+    #pygame.draw.rect(screen, BLACK, [200, 200, 150, 70], 0)
 
     pygame.draw.ellipse(screen, BLACK, [130, 140, 300, 200], 0)  
     pygame.draw.ellipse(screen, BLACK, [390, 140, 300, 200], 0)
     pygame.draw.ellipse(screen, GREY, [195, 190, 170, 100], 0)
     pygame.draw.ellipse(screen, GREY, [460, 190, 170, 100], 0) 
-    pygame.draw.ellipse(screen, WHITE, [170, 165, 220, 150], 1)
-    pygame.draw.ellipse(screen, WHITE, [435, 165, 220, 150], 1)
+    pygame.draw.ellipse(screen, WHITE, [170, 165, 220, 150], 2)
+    pygame.draw.ellipse(screen, WHITE, [435, 165, 220, 150], 2)
+    pygame.draw.ellipse(screen, YELLOW, [130, 140, 300, 200], 2)
+    pygame.draw.ellipse(screen, YELLOW, [390, 140, 300, 200], 2)
+    pygame.draw.rect(screen, BLACK, [380, 190, 70, 100], 0)
+    pygame.draw.line(screen, WHITE, [450, 275], [380, 210], 2)
+    pygame.draw.line(screen, WHITE, [450, 204], [380, 270], 2)
    
      # Update the screen with queued shapes
     pygame.display.flip()
