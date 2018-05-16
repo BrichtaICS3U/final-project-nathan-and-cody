@@ -148,12 +148,14 @@ button_Quit = Button("Quit", (SCREENWIDTH/2, SCREENHEIGHT*3/4), GREY, my_quit_fu
 button_Settings = Button("Settings", (SCREENWIDTH/2, SCREENHEIGHT/2), GREY, my_settings_function, DGREY)
 button_On = Button("ON", (SCREENWIDTH/4, SCREENHEIGHT/6), B_GREEN, my_on_function, GREEN)
 button_Off = Button("OFF", (SCREENWIDTH*3/4, SCREENHEIGHT/6), RED, my_off_function, BLOOD)
-button_songchange = Button("Change Song", (SCREENWIDTH/2, SCREENHEIGHT*5/10), GREY, my_change_song_function, DGREY)
+button_songchange = Button("Change Song", (SCREENWIDTH/2, SCREENHEIGHT*2/10), GREY, my_change_song_function, DGREY)
 
-
-button_colourRED = Button("RED", (SCREENWIDTH*1/4, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
-button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/4, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
-button_colourYELLOW = Button("YELLOW", (SCREENWIDTH*3/4, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+button_colourchange = Button("Colour", (SCREENWIDTH/2, SCREENHEIGHT*5/10), GREY, my_change_song_function, DGREY)
+button_colourRED = Button("RED", (SCREENWIDTH*1/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+button_colourYELLOW = Button("YELLOW", (SCREENWIDTH*3/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+button_colourGREEN = Button("GREEN", (SCREENWIDTH*4/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+button_colourPINK = Button("PINK", (SCREENWIDTH*5/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 
 button_trackOne = Button("Track One", (SCREENWIDTH/3, SCREENHEIGHT/2), GREY, my_track1_function, DGREY)
 button_trackTwo = Button("Track Two",  (SCREENWIDTH/2, SCREENHEIGHT/2), GREY, my_track2_function, DGREY)
@@ -161,7 +163,7 @@ button_trackThree = Button("Track Three",  (SCREENWIDTH*2/3, SCREENHEIGHT/2), GR
 
 #arrange button groups depending on level
 level1_buttons = [button_Settings, button_Play, button_Quit]
-level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_colourBLUE, button_colourYELLOW, button_songchange]
+level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_colourBLUE, button_colourYELLOW, button_colourGREEN, button_colourPINK, button_songchange,button_colourchange]
 level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
 
 #Background Coordinates
@@ -171,6 +173,7 @@ bx = 0
 by = 0
 #Lap Counter
 lap = 1
+
 #---------Main Program Loop----------
 while carryOn:
     # --- Main event loop ---
@@ -184,7 +187,7 @@ while carryOn:
 
     # --- Draw code goes here
 
-    # Clear the screen to white
+    # Cl ear the screen to white
     screen.fill(WHITE)
     screen.blit(BackGround,(0,0))
     # Draw buttons/  
@@ -205,7 +208,7 @@ while carryOn:
             button.draw()
         font = pygame.font.SysFont('magneto', 40)
         text = font.render("Pick a Track", 1, (WHITE))
-        screen.blit(text, (300, 1))
+        screen.blit(text, (275, 1))
 
     elif level == 4:
         if player.rect.x > SCREENWIDTH/2 and player.rect.x < SCREENWIDTH/2+5 and player.rect.y < SCREENHEIGHT/2:
