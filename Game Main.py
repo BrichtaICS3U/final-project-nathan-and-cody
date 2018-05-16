@@ -6,18 +6,18 @@ pygame.init()
 from buttonClass import Button
 #from trackClass import Track
 from carClass import Player
-BackGround = pygame.image.load('lamborgini-egoista-36475.jpg')
-Road_Atlanta = pygame.image.load('Road_Atlanta.png')
-Oval_Track = pygame.image.load("Oval_Track.png")
-
+BackGround = pygame.image.load('Photos/lamborgini-egoista-36475.jpg')
+Road_Atlanta = pygame.image.load('Photos/Road_Atlanta.png')
+Oval_Track = pygame.image.load("Photos/Oval_Track.png")
+Nurburgring = pygame.image.load('Photos/Nurburgring.png')
 
 playlist = []
-playlist.append ('Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
-playlist.append ('Lil Uzi Vert Ft. Quavo & Travis Scott- Go Off (Clean) (1).mp3')
-playlist.append ('PnB Rock- Horses (Clean).mp3')
-playlist.append ('Rick Astley - Never Gonna Give You Up (Video).mp3')
-playlist.append ('Darude - Sandstorm.mp3')
-playlist.append ('Legend Has It Clean - Run The Jewels.mp3')
+playlist.append ('Music/Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
+playlist.append ('Music/Lil Uzi Vert Ft. Quavo & Travis Scott- Go Off (Clean) (1).mp3')
+playlist.append ('Music/PnB Rock- Horses (Clean).mp3')
+playlist.append ('Music/Rick Astley - Never Gonna Give You Up (Video).mp3')
+playlist.append ('Music/Darude - Sandstorm.mp3')
+playlist.append ('Music/Legend Has It Clean - Run The Jewels.mp3')
 
 Sound = pygame.mixer_music.load(playlist[random.randint(0,3)])
 pygame.mixer.music.play()
@@ -53,15 +53,9 @@ colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK)
 
 all_sprites_list = pygame.sprite.Group()
  
-player = Player(RED, 10, 10, 0, 0)
-player.rect.x = 160
-player.rect.y = SCREENHEIGHT - 100
+player = Player(0)
 
 all_sprites_list.add(player)
-
-def my_shell_function():
-    """A generic function that prints something in the shell"""
-    print('Fire the nukes!')
 
 def my_play_function():
    global level
@@ -242,89 +236,35 @@ while carryOn:
         screen.blit(Oval_Track,(bx, by))
         print(bx, by)
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            player.speedx += 1
-            #bx += player.speed
-        if keys[pygame.K_a]:
-            player.speedx += 1
-           # bx += player.speed          
-        if keys[pygame.K_RIGHT]:
-            player.speedx -= 1
-           # bx += player.speed  
-        if keys[pygame.K_d]:
-            player.speedx -= 1
-           # bx += player.speed
-        if keys[pygame.K_UP]:
-            player.speedy += 1
-           # by += player.speed   
-        if keys[pygame.K_w]:
-            player.speedy += 1
-          #  by += player.speed  
-        if keys[pygame.K_DOWN]:
-            player.speedy -= 1
-         #   by += player.speed
-        if keys[pygame.K_s]:
-            player.speedy -= 1
-          #  by += player.speed
-        if keys[pygame.K_SPACE]:
-            player.speedy = 0
-            player.speedx = 0
-
-        bx += player.speedx
-        by += player.speedy
-
-        player.speedx *= 0.99
-        player.speedy *= 0.99
-        player.rect.x = SCREENWIDTH/2
-        player.rect.y = SCREENHEIGHT/2
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            player.rotLeft(2)          
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            player.rotRight(2)
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
+           bx, by = player.moveForward(bx, by)
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            bx, by = player.moveForward(bx, by)
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
-        font = pygame.font.SysFont('magneto', 40)
+        font = pygame.font.SysFont('Segoe Print', 40)
         text = font.render("Lap"+str(lap), 1, (WHITE))
         screen.blit(text, (300, 1))
         
     elif level == 6:
-        if bx < -1250 and bx > -1350 and by > -2250:
+        if bx < -1250 and bx > -1255 and by > -2250:
             lap += 1
         screen.fill(WHITE)
         screen.blit(Road_Atlanta,(bx, by))
         print(bx, by)
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            player.speedx += 1
-            #bx += player.speed
-        if keys[pygame.K_a]:
-            player.speedx += 1
-           # bx += player.speed          
-        if keys[pygame.K_RIGHT]:
-            player.speedx -= 1
-           # bx += player.speed  
-        if keys[pygame.K_d]:
-            player.speedx -= 1
-           # bx += player.speed
-        if keys[pygame.K_UP]:
-            player.speedy += 1
-           # by += player.speed   
-        if keys[pygame.K_w]:
-            player.speedy += 1
-          #  by += player.speed  
-        if keys[pygame.K_DOWN]:
-            player.speedy -= 1
-         #   by += player.speed
-        if keys[pygame.K_s]:
-            player.speedy -= 1
-          #  by += player.speed
-        if keys[pygame.K_SPACE]:
-            player.speedy = 0
-            player.speedx = 0
-
-        bx += player.speedx
-        by += player.speedy
-
-        player.speedx *= 0.99
-        player.speedy *= 0.99
-        player.rect.x = SCREENWIDTH/2
-        player.rect.y = SCREENHEIGHT/2
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            player.rotLeft(2)          
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            player.rotRight(2)
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
+           bx, by = player.moveForward(bx, by)
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            bx, by = player.moveForward(bx, by)
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
         font = pygame.font.SysFont('Segoe Print', 40)
@@ -337,12 +277,3 @@ while carryOn:
     clock.tick(60)
 
 pygame.quit()
-
-
-
-
-   # pygame.draw.ellipse(screen, YELLOW, [100, 110, 600, 300], 3)
-   # pygame.draw.rect(screen, GREEN, [55, 300, 300, 70], 0)
-   # pygame.draw.ellipse(screen, WHITE, [140, 135, 525, 250], 1)
-   # pygame.draw.ellipse(screen, BLACK, [100, 110, 600, 300], 0)
-   # pygame.draw.ellipse(screen, GREY,[180, 160, 450, 200], 0)

@@ -1,40 +1,48 @@
-import pygame
+import pygame, math
 pygame.init()
 WHITE = (255, 255, 255)
 GREY = (127, 127, 127)
 BLACK = (0, 0, 0)
+SCREENWIDTH = 800
+SCREENHEIGHT = 507
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, colour, width, height, speedx, speedy):
+    def __init__(self, startangle):
 
         super().__init__()
 
-        self.image = pygame.Surface([width, height])
-        self.image.fill(WHITE)
-        self.image.set_colorkey(WHITE)
-
-        self.width = width
-        self.height = height
-        self.colour = colour
-        self.speedx = speedx
-        self.speedy = speedy
-
-        pygame.draw.rect(self.image, self.colour, [0, 0, self.width, self.height])
-
+        self.image = pygame.image.load("Photos/car.png")
+        self.original = self.image
+        self.angle = startangle
         self.rect = self.image.get_rect()
+        self.rect.center = (SCREENWIDTH/2, SCREENHEIGHT/2)
 
-    def moveRight(self, pixels):
-        self.rect.x += pixels
+    def rotRight(self, angle):
+        self.angle -= angle
+        oldCenter = self.rect.center
+        self.image = pygame.transform.rotate(self.original, self.angle)
+        self.rect = self.image.get_rect()
+        self.rect.center = oldCenter
  
-    def moveLeft(self, pixels):
-        self.rect.x -= pixels
+    def rotLeft(self, angle):
+        self.angle += angle
+        oldCenter = self.rect.center
+        self.image = pygame.transform.rotate(self.original, self.angle)
+        self.rect = self.image.get_rect()
+        self.rect.center = oldCenter
  
-    def moveForward(self, pixels):
-        self.rect.y -= pixels
+    def moveForward(self, bx, by):
+        bx -= math.cos(math.radians(self.angle))*20
+        by += math.sin(math.radians(self.angle))*20
+        return bx, by
+        #self.rect.y -= math.cos(math.radians(self.angle))*10
+        #self.rect.x -= math.sin(math.radians(self.angle))*10
  
-    def moveBackward(self, pixels):
-        self.rect.y += pixels
+    def moveBackward(self, bx, by):
+        bx += math.cos(math.radians(self.angle))*10
+        by -= math.sin(math.radians(self.angle))*10
+        return bx, by
  
     def changeSpeed(self, speed):
         self.speed = speed
@@ -42,3 +50,7 @@ class Player(pygame.sprite.Sprite):
     def repaint(self, color):
         self.color = color
         pygame.draw.rect(self.image, self.color, [0, 0, self.width, self.height])
+        
+    def draw(self, screen):
+        self.rect.center = (SCREENWIDTH/2, SCREENHEIGHT/2)
+        screen.blit(self.image, self.rect)
