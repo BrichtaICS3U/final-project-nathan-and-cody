@@ -197,38 +197,28 @@ while carryOn:
         screen.blit(text, (300, 1))
 
     elif level == 4:
-        if player.rect.x > SCREENWIDTH/2 and player.rect.x < SCREENWIDTH/2+5 and player.rect.y < SCREENHEIGHT/2:
+       bx = -3977.1424852867044
+       by = -3932.452859504728
+       if player.rect.x > SCREENWIDTH/2 and player.rect.x < SCREENWIDTH/2+5 and player.rect.y < SCREENHEIGHT/2:
             lap += 1
         #MOVE THE TRACK, NOT THE SPRITE!!
-            keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            player.moveLeft(3)
-        if keys[pygame.K_a]:
-            player.moveLeft(3)
-        if keys[pygame.K_RIGHT]:
-            player.moveRight(3)
-        if keys[pygame.K_d]:
-            player.moveRight(3)
-        if keys[pygame.K_UP]:
-            player.moveForward(3)
-        if keys[pygame.K_w]:
-            player.moveForward(3)
-        if keys[pygame.K_DOWN]:
-            player.moveBackward(3)
-        if keys[pygame.K_s]:
-            player.moveBackward(3)
-
-        screen.fill(GREEN)
-        pygame.draw.ellipse(screen, BLACK, [100, 110, 600, 300], 0)
-        pygame.draw.ellipse(screen, GREY, [180, 160, 450, 200], 0)
-        pygame.draw.ellipse(screen, WHITE, [140, 135, 525, 250], 1)
-        pygame.draw.ellipse(screen, YELLOW, [100, 110, 600, 300], 3)
+       screen.fill(WHITE)
+       screen.blit(Nurburgring,(bx, by))
+        print(bx, by)
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            player.rotLeft(2)          
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            player.rotRight(2)
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
+           bx, by = player.moveForward(bx, by)
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            bx, by = player.moveForward(bx, by)
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
-        font = pygame.font.SysFont('magneto', 40)
+        font = pygame.font.SysFont('Segoe Print', 40)
         text = font.render("Lap"+str(lap), 1, (WHITE))
         screen.blit(text, (300, 1))
-        
     elif level == 5:
         if bx < -3100 and bx > -3105 and by > -1900:
             lap += 1
