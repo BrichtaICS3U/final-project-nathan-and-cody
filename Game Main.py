@@ -42,6 +42,7 @@ DGRAY = (45, 45, 45)
 YELLOW = (250, 255, 0)
 DGREY = (45, 45, 45)
 PINK = (237, 54, 176)
+ORANGE = (255, 91, 15)
 
 
 SCREENWIDTH = 800
@@ -146,7 +147,7 @@ button_songchange = Button("Change Song", (SCREENWIDTH/2, SCREENHEIGHT*2/10), GR
 button_colourchange = Button("Colour", (SCREENWIDTH/2, SCREENHEIGHT*5/10), GREY, my_change_song_function, DGREY)
 button_colourRED = Button("RED", (SCREENWIDTH*1/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
-button_colourYELLOW = Button("YELLOW", (SCREENWIDTH*3/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+button_colourORANGE = Button("ORANGE", (SCREENWIDTH*3/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 button_colourGREEN = Button("GREEN", (SCREENWIDTH*4/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 button_colourPINK = Button("PINK", (SCREENWIDTH*5/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 
@@ -156,7 +157,7 @@ button_trackThree = Button("Track Three",  (SCREENWIDTH*2/3, SCREENHEIGHT/2), GR
 
 #arrange button groups depending on level
 level1_buttons = [button_Settings, button_Play, button_Quit]
-level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_colourBLUE, button_colourYELLOW, button_colourGREEN, button_colourPINK, button_songchange,button_colourchange]
+level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_colourBLUE, button_colourORANGE, button_colourGREEN, button_colourPINK, button_songchange,button_colourchange]
 level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
 
 #Background Coordinates
