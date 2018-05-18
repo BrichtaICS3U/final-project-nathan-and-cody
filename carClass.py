@@ -8,7 +8,7 @@ SCREENHEIGHT = 507
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, startangle):
+    def __init__(self, startangle, speed):
 
         super().__init__()
 
@@ -17,6 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.angle = startangle
         self.rect = self.image.get_rect()
         self.rect.center = (SCREENWIDTH/2, SCREENHEIGHT/2)
+        self.speed = speed
 
     def rotRight(self, angle):
         self.angle -= angle
@@ -36,17 +37,18 @@ class Player(pygame.sprite.Sprite):
         bx -= math.cos(math.radians(self.angle))*20
         by += math.sin(math.radians(self.angle))*20
         return bx, by
-        #self.rect.y -= math.cos(math.radians(self.angle))*10
-        #self.rect.x -= math.sin(math.radians(self.angle))*10
  
     def moveBackward(self, bx, by):
-        bx += math.cos(math.radians(self.angle))*10
-        by -= math.sin(math.radians(self.angle))*10
+        bx += math.cos(math.radians(self.angle))*20
+        by -= math.sin(math.radians(self.angle))*20
         return bx, by
- 
-    def changeSpeed(self, speed):
-        self.speed = speed
- 
+    
+    def speed(self, bx, by, speed):
+        speed +=5
+        bx += math.cos(math.radians(self.angle))*speed
+        by -= math.sin(math.radians(self.angle))*speed
+        return bx, by, speed
+
     def repaint(self, color):
         self.color = color
         pygame.draw.rect(self.image, self.color, [0, 0, self.width, self.height])
