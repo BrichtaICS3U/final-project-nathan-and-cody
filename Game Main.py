@@ -234,7 +234,7 @@ while carryOn:
           #bx, by = player.moveForward(bx, by)
           bx, by, speed = player.accelerate(bx, by, speed)
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-          bx, by = player.moveBackward(bx, by)
+          bx, by, speed = player.moveBackward(bx, by, speed)
 
        speed *= 0.99
        all_sprites_list.update()       
@@ -258,7 +258,7 @@ while carryOn:
            #bx, by = player.moveForward(bx, by)
            bx, by, speed = player.accelerate(bx, by, speed)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            bx, by = player.moveBackward(bx, by)
+            bx, by, speed = player.moveBackward(bx, by, speed)
 
         speed *= 0.99            
         all_sprites_list.update()       
@@ -281,7 +281,7 @@ while carryOn:
        if keys[pygame.K_UP] or keys[pygame.K_w]:
           bx, by, speed = player.accelerate(bx, by, speed)
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-           bx, by = player.moveBackward(bx, by)
+           bx, by, speed = player.moveBackward(bx, by, speed)
            
        speed *= 0.99     
        all_sprites_list.update()       
