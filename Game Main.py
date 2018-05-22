@@ -54,8 +54,9 @@ screen = pygame.display.set_mode(size)
 colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK, YELLOW)
 
 all_sprites_list = pygame.sprite.Group()
+ 
+player = Player(0)
 
-player = Player(0, 0)
 all_sprites_list.add(player)
 
 def my_play_function():
@@ -149,7 +150,7 @@ button_colourRED = Button("RED", (SCREENWIDTH*1/6, SCREENHEIGHT*2/3), GREY, my_c
 button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 button_colourORANGE = Button("ORANGE", (SCREENWIDTH*3/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 button_colourGREEN = Button("GREEN", (SCREENWIDTH*4/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
-button_colourPINK = Button("PINK", (SCREENWIDTH*5/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+button_colourPINK = Button("PINK", (SCREENWIDTH*5/6, SCREENHEIGHT*2/3), PINK, my_colour_change_function, DGREY)
 
 button_trackOne = Button("Track One", (SCREENWIDTH/3, SCREENHEIGHT/2), GREY, my_track1_function, DGREY)
 button_trackTwo = Button("Track Two",  (SCREENWIDTH/2, SCREENHEIGHT/2), GREY, my_track2_function, DGREY)
@@ -165,23 +166,9 @@ global bx
 global by
 bx = 0
 by = 0
-if level == 6:
-   bx = -5737.784349516841
-   by = -4844.161228507984
-elif level == 5:
-   bx = -3171.2869853157113
-   by = -1446.547152509328
-elif level == 4:
-   bx = -3977.1424852867044
-   by = -3932.452859504728
-   
-global speed
-speed = 0
 #Lap Counter
-lap = 17
-global a, b
-a = 0
-b = 0
+lap = 1
+
 #---------Main Program Loop----------
 while carryOn:
     # --- Main event loop ---
@@ -219,6 +206,8 @@ while carryOn:
         screen.blit(text, (275, 1))
 
     elif level == 4:
+       bx = -3977.1424852867044
+       by = -3932.452859504728
        if player.rect.x > SCREENWIDTH/2 and player.rect.x < SCREENWIDTH/2+5 and player.rect.y < SCREENHEIGHT/2:
             lap += 1
         #MOVE THE TRACK, NOT THE SPRITE!!
@@ -227,22 +216,18 @@ while carryOn:
        print(bx, by)
        keys = pygame.key.get_pressed()
        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-          player.rotLeft(6)          
+          player.rotLeft(2)          
        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-          player.rotRight(6)
+          player.rotRight(2)
        if keys[pygame.K_UP] or keys[pygame.K_w]:
-          #bx, by = player.moveForward(bx, by)
-          bx, by, speed = player.accelerate(bx, by, speed)
+          bx, by = player.moveForward(bx, by)
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-          bx, by, speed = player.moveBackward(bx, by, speed)
-
-       speed *= 0.99
+          bx, by = player.moveForward(bx, by)
        all_sprites_list.update()       
        all_sprites_list.draw(screen)
        font = pygame.font.SysFont('Segoe Print', 40)
        text = font.render("Lap"+str(lap), 1, (WHITE))
        screen.blit(text, (300, 1))
-       
     elif level == 5:
         if bx < -3100 and bx > -3105 and by > -1900:
             lap += 1
@@ -251,16 +236,13 @@ while carryOn:
         print(bx, by)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            player.rotLeft(6)          
+            player.rotLeft(2)          
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            player.rotRight(6)
+            player.rotRight(2)
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-           #bx, by = player.moveForward(bx, by)
-           bx, by, speed = player.accelerate(bx, by, speed)
+           bx, by = player.moveForward(bx, by)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            bx, by, speed = player.moveBackward(bx, by, speed)
-
-        speed *= 0.99            
+            bx, by = player.moveForward(bx, by)
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
         font = pygame.font.SysFont('Segoe Print', 40)
@@ -268,27 +250,25 @@ while carryOn:
         screen.blit(text, (300, 1))
         
     elif level == 6:
-       if bx < -1250 and bx > -1255 and by > -2250:
+        if bx < -1250 and bx > -1255 and by > -2250:
             lap += 1
-       screen.fill(WHITE)
-       screen.blit(Road_Atlanta,(bx, by))
-       print(bx, by)
-       keys = pygame.key.get_pressed()
-       if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-           player.rotLeft(6)          
-       if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-           player.rotRight(6)
-       if keys[pygame.K_UP] or keys[pygame.K_w]:
-          bx, by, speed = player.accelerate(bx, by, speed)
-       if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-           bx, by, speed = player.moveBackward(bx, by, speed)
-           
-       speed *= 0.99     
-       all_sprites_list.update()       
-       all_sprites_list.draw(screen)
-       font = pygame.font.SysFont('magneto', 40)
-       text = font.render("Lap"+str(lap), 1, (WHITE))
-       screen.blit(text, (300, 1))
+        screen.fill(WHITE)
+        screen.blit(Road_Atlanta,(bx, by))
+        print(bx, by)
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            player.rotLeft(2)          
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            player.rotRight(2)
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
+           bx, by = player.moveForward(bx, by)
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            bx, by = player.moveForward(bx, by)
+        all_sprites_list.update()       
+        all_sprites_list.draw(screen)
+        font = pygame.font.SysFont('magneto', 40)
+        text = font.render("Lap"+str(lap), 1, (WHITE))
+        screen.blit(text, (300, 1))
     # Update the screen with queued shapes
     pygame.display.flip()
 
