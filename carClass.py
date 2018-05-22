@@ -39,9 +39,14 @@ class Player(pygame.sprite.Sprite):
         #return bx, by
  
     def moveBackward(self, bx, by, speed):
-        speed -= 5
-        bx += math.cos(math.radians(self.angle))*speed
-        by -= math.sin(math.radians(self.angle))*speed
+        if speed >= 5:
+            speed -= 5
+            bx += math.cos(math.radians(self.angle))*speed
+            by -= math.sin(math.radians(self.angle))*speed
+        elif speed >= 0:
+            speed +=5
+            bx += math.cos(math.radians(self.angle))*speed
+            by -= math.sin(math.radians(self.angle))*speed
         return bx, by, speed
     
     def accelerate(self, bx, by, speed):
@@ -49,7 +54,18 @@ class Player(pygame.sprite.Sprite):
         bx -= math.cos(math.radians(self.angle))*speed
         by += math.sin(math.radians(self.angle))*speed
         return bx, by, speed
-
+    
+    def deccelerate(self, bx, by, speed):
+        if speed >= 5:
+            speed *= 0.95
+            bx -= math.cos(math.radians(self.angle))*speed
+            by += math.sin(math.radians(self.angle))*speed
+        elif speed >= 0:
+            speed = 0
+            bx -= math.cos(math.radians(self.angle))*speed
+            by += math.sin(math.radians(self.angle))*speed
+        return(bx, by, speed)
+    
     def repaint(self, color):
         self.color = color
         pygame.draw.rect(self.image, self.color, [0, 0, self.width, self.height])
