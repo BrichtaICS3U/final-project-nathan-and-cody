@@ -232,7 +232,7 @@ while carryOn:
           player.rotRight(6)
        if keys[pygame.K_UP] or keys[pygame.K_w]:
           #bx, by = player.moveForward(bx, by)
-          a, b, speed = player.speed(bx, by, speed)
+          bx, by, speed = player.accelerate(bx, by, speed)
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
           bx, by = player.moveBackward(bx, by)
 
@@ -256,7 +256,7 @@ while carryOn:
             player.rotRight(6)
         if keys[pygame.K_UP] or keys[pygame.K_w]:
            #bx, by = player.moveForward(bx, by)
-           a, b, speed = player.speed(bx, by, speed)
+           bx, by, speed = player.accelerate(bx, by, speed)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             bx, by = player.moveBackward(bx, by)
 
@@ -279,8 +279,7 @@ while carryOn:
        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
            player.rotRight(6)
        if keys[pygame.K_UP] or keys[pygame.K_w]:
-          #bx, by = player.moveForward(bx, by)
-          bx, by, speed = player.speed(bx, by, speed)
+          bx, by, speed = player.accelerate(bx, by, speed)
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
            bx, by = player.moveBackward(bx, by)
            
