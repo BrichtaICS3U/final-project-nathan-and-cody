@@ -213,9 +213,10 @@ while carryOn:
         #MOVE THE TRACK, NOT THE SPRITE!!
        screen.fill(WHITE)
        screen.blit(Nurburgring,(bx, by))
-       print(bx, by)
+       print(bx, by, speed)
        keys = pygame.key.get_pressed()
        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+<<<<<<< HEAD
           player.rotLeft(2)          
        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
           player.rotRight(2)
@@ -223,6 +224,19 @@ while carryOn:
           bx, by = player.moveForward(bx, by)
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
           bx, by = player.moveForward(bx, by)
+=======
+           player.rotLeft(6)          
+       if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+           player.rotRight(6)
+       if keys[pygame.K_UP] or keys[pygame.K_w]:
+          bx, by, speed = player.accelerate(bx, by, speed)
+       if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+           bx, by, speed = player.moveBackward(bx, by, speed)
+       else:
+           bx, by, speed = player.deccelerate(bx, by, speed)
+
+           4
+>>>>>>> 3e1463175232530766f3f06ddbe900f070b2033e
        all_sprites_list.update()       
        all_sprites_list.draw(screen)
        font = pygame.font.SysFont('Segoe Print', 40)
@@ -233,16 +247,25 @@ while carryOn:
             lap += 1
         screen.fill(WHITE)
         screen.blit(Oval_Track,(bx, by))
-        print(bx, by)
+        print(bx, by, speed)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             player.rotLeft(2)          
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             player.rotRight(2)
         if keys[pygame.K_UP] or keys[pygame.K_w]:
+<<<<<<< HEAD
            bx, by = player.moveForward(bx, by)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             bx, by = player.moveForward(bx, by)
+=======
+           bx, by, speed = player.accelerate(bx, by, speed)
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            bx, by, speed = player.moveBackward(bx, by, speed)
+        else:
+            bx, by, speed = player.deccelerate(bx, by, speed)
+            
+>>>>>>> 3e1463175232530766f3f06ddbe900f070b2033e
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
         font = pygame.font.SysFont('Segoe Print', 40)
@@ -252,6 +275,7 @@ while carryOn:
     elif level == 6:
         if bx < -1250 and bx > -1255 and by > -2250:
             lap += 1
+<<<<<<< HEAD
         screen.fill(WHITE)
         screen.blit(Road_Atlanta,(bx, by))
         print(bx, by)
@@ -269,6 +293,28 @@ while carryOn:
         font = pygame.font.SysFont('magneto', 40)
         text = font.render("Lap"+str(lap), 1, (WHITE))
         screen.blit(text, (300, 1))
+=======
+       screen.fill(WHITE)
+       screen.blit(Road_Atlanta,(bx, by))
+       print(bx, by, speed)
+       keys = pygame.key.get_pressed()
+       if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+           player.rotLeft(6)          
+       if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+           player.rotRight(6)
+       if keys[pygame.K_UP] or keys[pygame.K_w]:
+          bx, by, speed = player.accelerate(bx, by, speed)
+       if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+           bx, by, speed = player.moveBackward(bx, by, speed)
+       else:
+           bx, by, speed = player.deccelerate(bx, by, speed)
+             
+       all_sprites_list.update()       
+       all_sprites_list.draw(screen)
+       font = pygame.font.SysFont('magneto', 40)
+       text = font.render("Lap"+str(lap), 1, (WHITE))
+       screen.blit(text, (300, 1))
+>>>>>>> 3e1463175232530766f3f06ddbe900f070b2033e
     # Update the screen with queued shapes
     pygame.display.flip()
 
