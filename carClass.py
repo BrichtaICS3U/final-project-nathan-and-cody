@@ -8,11 +8,11 @@ SCREENHEIGHT = 507
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, startangle, speed):
+    def __init__(self, startangle, speed, image):
 
         super().__init__()
 
-        self.image = pygame.image.load("Photos/car.png")
+        self.image = image
         self.original = self.image
         self.angle = startangle
         self.rect = self.image.get_rect()

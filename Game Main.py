@@ -4,12 +4,16 @@
 import pygame, sys, random
 pygame.init()
 from buttonClass import Button
-#from trackClass import Track
 from carClass import Player
 BackGround = pygame.image.load('Photos/lamborgini-egoista-36475.jpg')
 Road_Atlanta = pygame.image.load('Photos/Road_Atlanta.png')
 Oval_Track = pygame.image.load("Photos/Oval_Track.png")
 Nurburgring = pygame.image.load('Photos/Nurburgring.png')
+Blue_Car = pygame.image.load('Photos/Blue Car.png')
+Green_Car = pygame.image.load('Photos/Green Car.png')
+Smile_Car = pygame.image.load('Photos/Smile Car.png')
+Orange_car = pygame.image.load('Photos/Orange Car.png')
+
 
 playlist = []
 playlist.append ('Music/Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
@@ -54,9 +58,25 @@ screen = pygame.display.set_mode(size)
 colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK, YELLOW)
 
 all_sprites_list = pygame.sprite.Group()
-
-player = Player(0, 0)
+a = Green_Car
+player = Player(0, 0,  a)
 all_sprites_list.add(player)
+
+def blue_car():
+   global a
+   a = Blue_Car
+
+def green_car():
+   global a
+   a = Green_Car
+
+def orange_car():
+   global a
+   a = Orange_Car
+
+def smile_car():
+   global a
+   a = Smile_Car
 
 def my_play_function():
    global level
@@ -146,10 +166,10 @@ button_songchange = Button("Change Song", (SCREENWIDTH/2, SCREENHEIGHT*2/10), GR
 
 button_colourchange = Button("Colour", (SCREENWIDTH/2, SCREENHEIGHT*5/10), GREY, my_change_song_function, DGREY)
 button_colourRED = Button("RED", (SCREENWIDTH*1/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
-button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
-button_colourORANGE = Button("ORANGE", (SCREENWIDTH*3/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
-button_colourGREEN = Button("GREEN", (SCREENWIDTH*4/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
-button_colourPINK = Button("PINK", (SCREENWIDTH*5/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/6, SCREENHEIGHT*2/3), GREY, blue_car, DGREY)
+button_colourORANGE = Button("ORANGE", (SCREENWIDTH*3/6, SCREENHEIGHT*2/3), GREY, orange_car, DGREY)
+button_colourGREEN = Button("GREEN", (SCREENWIDTH*4/6, SCREENHEIGHT*2/3), GREY, green_car, DGREY)
+button_colourSmile = Button("SMILE", (SCREENWIDTH*5/6, SCREENHEIGHT*2/3), GREY, smile_car, DGREY)
 
 button_trackOne = Button("Track One", (SCREENWIDTH/3, SCREENHEIGHT/2), GREY, my_track1_function, DGREY)
 button_trackTwo = Button("Track Two",  (SCREENWIDTH/2, SCREENHEIGHT/2), GREY, my_track2_function, DGREY)
@@ -157,7 +177,7 @@ button_trackThree = Button("Track Three",  (SCREENWIDTH*2/3, SCREENHEIGHT/2), GR
 
 #arrange button groups depending on level
 level1_buttons = [button_Settings, button_Play, button_Quit]
-level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_colourBLUE, button_colourORANGE, button_colourGREEN, button_colourPINK, button_songchange,button_colourchange]
+level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_colourBLUE, button_colourORANGE, button_colourGREEN, button_colourSmile, button_songchange,button_colourchange]
 level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
 
 #Background Coordinates
@@ -178,10 +198,7 @@ elif level == 4:
 global speed
 speed = 0
 #Lap Counter
-lap = 17
-global a, b
-a = 0
-b = 0
+lap = 1
 #---------Main Program Loop----------
 while carryOn:
     # --- Main event loop ---
