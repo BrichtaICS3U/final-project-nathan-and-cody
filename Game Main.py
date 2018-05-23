@@ -171,6 +171,7 @@ button_Off = Button("OFF", (SCREENWIDTH*3/4, SCREENHEIGHT/6), RED, my_off_functi
 button_songchange = Button("Change Song", (SCREENWIDTH/2, SCREENHEIGHT*2/10), GREY, my_change_song_function, DGREY)
 
 button_colourchange = Button("Colour", (SCREENWIDTH/2, SCREENHEIGHT*5/10), GREY, my_change_song_function, DGREY)
+<<<<<<< HEAD
 button_colourRED = Button("RED", (SCREENWIDTH*1/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 <<<<<<< HEAD
 button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/6, SCREENHEIGHT*2/3), GREY, blue_car, DGREY)
@@ -181,6 +182,12 @@ button_colourSmile = Button("SMILE", (SCREENWIDTH*5/6, SCREENHEIGHT*2/3), GREY, 
 button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 button_colourORANGE = Button("ORANGE", (SCREENWIDTH*3/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
 button_colourGREEN = Button("GREEN", (SCREENWIDTH*4/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+=======
+button_colourRED = Button("RED", (SCREENWIDTH*1/6, SCREENHEIGHT*2/3), RED, my_colour_change_function, DGREY)
+button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/6, SCREENHEIGHT*2/3), BLUE, my_colour_change_function, DGREY)
+button_colourORANGE = Button("ORANGE", (SCREENWIDTH*3/6, SCREENHEIGHT*2/3), ORANGE, my_colour_change_function, DGREY)
+button_colourGREEN = Button("GREEN", (SCREENWIDTH*4/6, SCREENHEIGHT*2/3), GREEN, my_colour_change_function, DGREY)
+>>>>>>> 7ca47f085bb534fee0422827cbeca26d55a41e03
 button_colourPINK = Button("PINK", (SCREENWIDTH*5/6, SCREENHEIGHT*2/3), PINK, my_colour_change_function, DGREY)
 >>>>>>> f07c894d9a85d82037ebfa2f6b3075b799cf079b
 
@@ -251,7 +258,6 @@ while carryOn:
        print(bx, by, speed)
        keys = pygame.key.get_pressed()
        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-<<<<<<< HEAD
           player.rotLeft(2)          
        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
           player.rotRight(2)
@@ -259,8 +265,7 @@ while carryOn:
           bx, by = player.moveForward(bx, by)
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
           bx, by = player.moveForward(bx, by)
-=======
-           player.rotLeft(6)          
+          player.rotLeft(6)          
        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
            player.rotRight(6)
        if keys[pygame.K_UP] or keys[pygame.K_w]:
@@ -270,8 +275,8 @@ while carryOn:
        else:
            bx, by, speed = player.deccelerate(bx, by, speed)
 
-           4
->>>>>>> 3e1463175232530766f3f06ddbe900f070b2033e
+         
+
        all_sprites_list.update()       
        all_sprites_list.draw(screen)
        font = pygame.font.SysFont('Segoe Print', 40)
@@ -289,18 +294,15 @@ while carryOn:
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             player.rotRight(2)
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-<<<<<<< HEAD
            bx, by = player.moveForward(bx, by)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             bx, by = player.moveForward(bx, by)
-=======
-           bx, by, speed = player.accelerate(bx, by, speed)
+            bx, by, speed = player.accelerate(bx, by, speed)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             bx, by, speed = player.moveBackward(bx, by, speed)
         else:
             bx, by, speed = player.deccelerate(bx, by, speed)
             
->>>>>>> 3e1463175232530766f3f06ddbe900f070b2033e
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
         font = pygame.font.SysFont('Segoe Print', 40)
@@ -310,7 +312,6 @@ while carryOn:
     elif level == 6:
         if bx < -1250 and bx > -1255 and by > -2250:
             lap += 1
-<<<<<<< HEAD
         screen.fill(WHITE)
         screen.blit(Road_Atlanta,(bx, by))
         print(bx, by)
@@ -328,9 +329,9 @@ while carryOn:
         font = pygame.font.SysFont('magneto', 40)
         text = font.render("Lap"+str(lap), 1, (WHITE))
         screen.blit(text, (300, 1))
-=======
-       screen.fill(WHITE)
-       screen.blit(Road_Atlanta,(bx, by))
+
+        screen.fill(WHITE)
+        screen.blit(Road_Atlanta,(bx, by))
        print(bx, by, speed)
        keys = pygame.key.get_pressed()
        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
@@ -349,7 +350,7 @@ while carryOn:
        font = pygame.font.SysFont('magneto', 40)
        text = font.render("Lap"+str(lap), 1, (WHITE))
        screen.blit(text, (300, 1))
->>>>>>> 3e1463175232530766f3f06ddbe900f070b2033e
+
     # Update the screen with queued shapes
     pygame.display.flip()
 
