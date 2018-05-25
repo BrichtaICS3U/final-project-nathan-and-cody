@@ -1,4 +1,4 @@
- # Menu template with button class and basic menu navigation
+# Menu template with button class and basic menu navigation
 # Adapted from http://www.dreamincode.net/forums/topic/401541-buttons-and-sliders-in-pygame/
 
 import pygame, sys, random
@@ -216,7 +216,7 @@ while carryOn:
        print(bx, by, speed)
        keys = pygame.key.get_pressed()
        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-          player.rotLeft(2)          
+          player.rotLeft(2)           
        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
           player.rotRight(2)
        if keys[pygame.K_UP] or keys[pygame.K_w]:
@@ -288,26 +288,26 @@ while carryOn:
         text = font.render("Lap"+str(lap), 1, (WHITE))
         screen.blit(text, (300, 1))
 
-       screen.fill(WHITE)
-       screen.blit(Road_Atlanta,(bx, by))
-       print(bx, by, speed)
-       keys = pygame.key.get_pressed()
-       if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+        screen.fill(WHITE)
+        screen.blit(Road_Atlanta,(bx, by))
+        print(bx, by, speed)
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
            player.rotLeft(6)          
-       if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
            player.rotRight(6)
-       if keys[pygame.K_UP] or keys[pygame.K_w]:
-          bx, by, speed = player.accelerate(bx, by, speed)
-       if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
+           bx, by, speed = player.accelerate(bx, by, speed)
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
            bx, by, speed = player.moveBackward(bx, by, speed)
-       else:
+        else:
            bx, by, speed = player.deccelerate(bx, by, speed)
              
-       all_sprites_list.update()       
-       all_sprites_list.draw(screen)
-       font = pygame.font.SysFont('magneto', 40)
-       text = font.render("Lap"+str(lap), 1, (WHITE))
-       screen.blit(text, (300, 1))
+        all_sprites_list.update()       
+        all_sprites_list.draw(screen)
+        font = pygame.font.SysFont('magneto', 40)
+        text = font.render("Lap"+str(lap), 1, (WHITE))
+        screen.blit(text, (300, 1))
 
     # Update the screen with queued shapes
     pygame.display.flip()
