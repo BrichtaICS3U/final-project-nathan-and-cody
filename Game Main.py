@@ -4,12 +4,18 @@
 import pygame, sys, random
 pygame.init()
 from buttonClass import Button
-#from trackClass import Track
 from carClass import Player
 BackGround = pygame.image.load('Photos/lamborgini-egoista-36475.jpg')
 Road_Atlanta = pygame.image.load('Photos/Road_Atlanta.png')
 Oval_Track = pygame.image.load("Photos/Oval_Track.png")
 Nurburgring = pygame.image.load('Photos/Nurburgring.png')
+Blue_Car = pygame.image.load('Photos/Blue Car.png')
+Green_Car = pygame.image.load('Photos/Green Car.png')
+Smile_Car = pygame.image.load('Photos/Smile Car.png')
+Orange_Car = pygame.image.load('Photos/Orange Car.png')
+Pink_Car = pygame.image.load("Photos/Pink Car.png")
+Red_Car = pygame.image.load("Photos/Red Car.png")
+
 
 playlist = []
 playlist.append ('Music/Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
@@ -54,15 +60,29 @@ screen = pygame.display.set_mode(size)
 colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK, YELLOW)
 
 all_sprites_list = pygame.sprite.Group()
-<<<<<<< HEAD
 a = Green_Car
 player = Player(0, 0,  a)
-=======
- 
-player = Player(0)
-
->>>>>>> 153cf288a75c105a5c73a27078e408d713454528
 all_sprites_list.add(player)
+
+def blue_car():
+   global a
+   a = Blue_Car
+
+def green_car():
+   global a
+   a = Green_Car
+
+def orange_car():
+   global a
+   a = Orange_Car
+
+def red_car():
+   global a
+   a = Red_Car
+
+def pink_car():
+   global a
+   a = Pink_Car
 
 def my_play_function():
    global level
@@ -152,19 +172,11 @@ button_Off = Button("OFF", (SCREENWIDTH*3/4, SCREENHEIGHT/6), RED, my_off_functi
 button_songchange = Button("Change Song", (SCREENWIDTH/2, SCREENHEIGHT*2/10), GREY, my_change_song_function, DGREY)
 
 button_colourchange = Button("Colour", (SCREENWIDTH/2, SCREENHEIGHT*5/10), GREY, my_change_song_function, DGREY)
-<<<<<<< HEAD
-button_colourRED = Button("RED", (SCREENWIDTH*1/6, SCREENHEIGHT*2/3), GREY, my_colour_change_function, DGREY)
+button_colourRED = Button("RED", (SCREENWIDTH*1/6, SCREENHEIGHT*2/3), GREY, red_car, DGREY)
 button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/6, SCREENHEIGHT*2/3), GREY, blue_car, DGREY)
 button_colourORANGE = Button("ORANGE", (SCREENWIDTH*3/6, SCREENHEIGHT*2/3), GREY, orange_car, DGREY)
 button_colourGREEN = Button("GREEN", (SCREENWIDTH*4/6, SCREENHEIGHT*2/3), GREY, green_car, DGREY)
-button_colourSmile = Button("SMILE", (SCREENWIDTH*5/6, SCREENHEIGHT*2/3), GREY, smile_car, DGREY)
-=======
-button_colourRED = Button("RED", (SCREENWIDTH*1/6, SCREENHEIGHT*2/3), RED, my_colour_change_function, DGREY)
-button_colourBLUE = Button("BLUE", (SCREENWIDTH*2/6, SCREENHEIGHT*2/3), BLUE, my_colour_change_function, DGREY)
-button_colourORANGE = Button("ORANGE", (SCREENWIDTH*3/6, SCREENHEIGHT*2/3), ORANGE, my_colour_change_function, DGREY)
-button_colourGREEN = Button("GREEN", (SCREENWIDTH*4/6, SCREENHEIGHT*2/3), GREEN, my_colour_change_function, DGREY)
-button_colourPINK = Button("PINK", (SCREENWIDTH*5/6, SCREENHEIGHT*2/3), PINK, my_colour_change_function, DGREY)
->>>>>>> 153cf288a75c105a5c73a27078e408d713454528
+button_colourSmile = Button("PINK", (SCREENWIDTH*5/6, SCREENHEIGHT*2/3), GREY, pink_car, DGREY)
 
 button_trackOne = Button("Track One", (SCREENWIDTH/3, SCREENHEIGHT/2), GREY, my_track1_function, DGREY)
 button_trackTwo = Button("Track Two",  (SCREENWIDTH/2, SCREENHEIGHT/2), GREY, my_track2_function, DGREY)
@@ -172,7 +184,7 @@ button_trackThree = Button("Track Three",  (SCREENWIDTH*2/3, SCREENHEIGHT/2), GR
 
 #arrange button groups depending on level
 level1_buttons = [button_Settings, button_Play, button_Quit]
-level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_colourBLUE, button_colourORANGE, button_colourGREEN, button_colourPINK, button_songchange,button_colourchange]
+level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_colourBLUE, button_colourORANGE, button_colourGREEN, button_colourSmile, button_songchange,button_colourchange]
 level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
 
 #Background Coordinates
@@ -195,15 +207,12 @@ speed = 0
 #Lap Counter
 lap = 1
 
-<<<<<<< HEAD
 #Timer
 global miliSec, Sec, Min
 miliSec = 0
 Sec = 0
 Min = 0
 
-=======
->>>>>>> 153cf288a75c105a5c73a27078e408d713454528
 #---------Main Program Loop----------
 while carryOn:
     # --- Main event loop ---
@@ -241,7 +250,7 @@ while carryOn:
         screen.blit(text, (275, 1))
 
     elif level == 4:
-       if player.rect.x > SCREENWIDTH/2 and player.rect.x < SCREENWIDTH/2+5 and player.rect.y < SCREENHEIGHT/2:
+       if player.rect.x < -3900 and player.rect.y < -3940 and player.rect.y > 4144:
             lap += 1
         #MOVE THE TRACK, NOT THE SPRITE!!
        screen.fill(WHITE)
@@ -258,8 +267,6 @@ while carryOn:
            bx, by, speed = player.moveBackward(bx, by, speed)
        else:
            bx, by, speed = player.deccelerate(bx, by, speed)
-
-       
 
        miliSec += 1
        if miliSec == 16:
@@ -279,16 +286,16 @@ while carryOn:
        screen.blit(text, (300, 15))
        
     elif level == 5:
-        if bx < -3100 and bx > -3105 and by > -1900:
+        if bx < -2560 and bx > -2570 and by > -2305 and by < -2020:
             lap += 1
         screen.fill(WHITE)
         screen.blit(Oval_Track,(bx, by))
         print(bx, by, speed)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            player.rotLeft(10)          
+            player.rotLeft(5)          
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            player.rotRight(10)
+            player.rotRight(5)
         if keys[pygame.K_UP] or keys[pygame.K_w]:
            bx, by, speed = player.accelerate(bx, by, speed)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
@@ -305,7 +312,7 @@ while carryOn:
            Sec = 0
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
-        font = pygame.font.SysFont('Segoe Print', 40)
+        font = pygame.font.SysFont('magneto', 40)
         text = font.render("Lap"+str(lap), 1, (WHITE))
         screen.blit(text, (300, 1))
         font = pygame.font.SysFont('Segoe Print', 40)
@@ -315,49 +322,38 @@ while carryOn:
     
         
     elif level == 6:
-       if bx < -1250 and bx > -1255 and by > -2250:
+       if bx < -2560 and bx > -2610 and by > -2305 and by < -2020:
             lap += 1
-<<<<<<< HEAD
-=======
-        screen.fill(WHITE)
-        screen.blit(Road_Atlanta,(bx, by))
-        print(bx, by)
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            player.rotLeft(2)          
-        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            player.rotRight(2)
-        if keys[pygame.K_UP] or keys[pygame.K_w]:
-           bx, by = player.moveForward(bx, by)
-        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            bx, by = player.moveForward(bx, by)
-        all_sprites_list.update()       
-        all_sprites_list.draw(screen)
-        font = pygame.font.SysFont('magneto', 40)
-        text = font.render("Lap"+str(lap), 1, (WHITE))
-        screen.blit(text, (300, 1))
-
->>>>>>> 153cf288a75c105a5c73a27078e408d713454528
        screen.fill(WHITE)
        screen.blit(Road_Atlanta,(bx, by))
        print(bx, by, speed)
        keys = pygame.key.get_pressed()
        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-           player.rotLeft(10)          
+           player.rotLeft(7)          
        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-           player.rotRight(10)
+           player.rotRight(7)
        if keys[pygame.K_UP] or keys[pygame.K_w]:
           bx, by, speed = player.accelerate(bx, by, speed)
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
            bx, by, speed = player.moveBackward(bx, by, speed)
        else:
            bx, by, speed = player.deccelerate(bx, by, speed)
-             
+
+       miliSec += 1
+       if miliSec == 16:
+          Sec += 1
+          miliSec = 0
+       if Sec == 59:
+          Min += 1
+          Sec = 0             
        all_sprites_list.update()       
        all_sprites_list.draw(screen)
        font = pygame.font.SysFont('magneto', 40)
        text = font.render("Lap"+str(lap), 1, (WHITE))
        screen.blit(text, (300, 1))
+       font = pygame.font.SysFont('Segoe Print', 40)
+       text = font.render(str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
+       screen.blit(text, (300, 15))
     # Update the screen with queued shapes
     pygame.display.flip()
 

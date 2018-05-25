@@ -33,11 +33,6 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = oldCenter
  
-    #def moveForward(self, bx, by):
-        #bx -= math.cos(math.radians(self.angle))*20
-       # by += math.sin(math.radians(self.angle))*20
-        #return bx, by
- 
     def moveBackward(self, bx, by, speed):
         if speed >= 1:
             speed -= 1
