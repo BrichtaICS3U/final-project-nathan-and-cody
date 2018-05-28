@@ -1,4 +1,4 @@
- # Menu template with button class and basic menu navigation
+# Menu template with button class and basic menu navigation
 # Adapted from http://www.dreamincode.net/forums/topic/401541-buttons-and-sliders-in-pygame/
 
 import pygame, sys, random
@@ -254,7 +254,15 @@ while carryOn:
        print(bx, by, speed)
        keys = pygame.key.get_pressed()
        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-           player.rotLeft(10)          
+          player.rotLeft(2)           
+       if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+          player.rotRight(2)
+       if keys[pygame.K_UP] or keys[pygame.K_w]:
+          bx, by = player.moveForward(bx, by)
+       if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+          bx, by = player.moveForward(bx, by)
+          player.rotLeft(6)          
+          player.rotLeft(10)          
        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
            player.rotRight(10)
        if keys[pygame.K_UP] or keys[pygame.K_w]:
@@ -318,7 +326,7 @@ while carryOn:
         
     elif level == 6:
        if bx < -2560 and bx > -2610 and by > -2305 and by < -2020:
-            lap += 1
+          lap += 1
        screen.fill(WHITE)
        screen.blit(Road_Atlanta,(bx, by))
        print(bx, by, speed)
@@ -332,7 +340,14 @@ while carryOn:
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
            bx, by, speed = player.moveBackward(bx, by, speed)
        else:
-           bx, by, speed = player.deccelerate(bx, by, speed)
+          bx, by, speed = player.deccelerate(bx, by, speed)
+             
+       all_sprites_list.update()       
+       all_sprites_list.draw(screen)
+       font = pygame.font.SysFont('magneto', 40)
+       text = font.render("Lap"+str(lap), 1, (WHITE))
+       screen.blit(text, (300, 1))
+
 
        miliSec += 1
        if miliSec == 16:
@@ -349,6 +364,7 @@ while carryOn:
        font = pygame.font.SysFont('Segoe Print', 40)
        text = font.render(str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
        screen.blit(text, (300, 15))
+
     # Update the screen with queued shapes
     pygame.display.flip()
 
