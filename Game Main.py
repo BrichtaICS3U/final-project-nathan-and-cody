@@ -15,7 +15,7 @@ Smile_Car = pygame.image.load('Photos/Smile Car.png')
 Orange_Car = pygame.image.load('Photos/Orange Car.png')
 Pink_Car = pygame.image.load("Photos/Pink Car.png")
 Red_Car = pygame.image.load("Photos/Red Car.png")
-
+car_list = [Blue_Car, Green_Car, Red_Car, Orange_Car, Pink_Car]
 
 playlist = []
 playlist.append ('Music/Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
@@ -66,11 +66,11 @@ all_sprites_list.add(player)
 
 def blue_car():
    global a
-   a = Blue_Car
+   a = car_list[0]
 
 def green_car():
    global a
-   a = Green_Car
+   a = car_list[1]
 
 def orange_car():
    global a
@@ -89,17 +89,23 @@ def my_play_function():
    level +=2
 
 def my_track1_function():
-    global level
+    global level, bx, by
     level += 1
+    bx = -342.9954700861159
+    by = -3130.942299098437
     
 def my_track2_function():
-    global level
+    global level, bx, by
     level += 2
+    bx = -3171.2869853157113
+    by = -1446.547152509328
 
 def my_track3_function():
-    global level
+    global level, bx, by
     level += 3
-
+    bx = -5737.784349516841
+    by = -4844.161228507984
+   
 def my_sound_function():
     print('Sound')
 
@@ -159,7 +165,6 @@ def mousebuttondown(level):
 level = 1
 carryOn = True
 clock = pygame.time.Clock()
-b = 0
 
 #create button objects
 button_Play = Button("Race", (SCREENWIDTH/2, SCREENHEIGHT/4), GREY,my_play_function, DGREY)
@@ -188,20 +193,10 @@ level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, butto
 level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
 
 #Background Coordinates
-global bx
-global by
 bx = 0
 by = 0
-if level == 6:
-   bx = -5737.784349516841
-   by = -4844.161228507984
-elif level == 5:
-   bx = -3171.2869853157113
-   by = -1446.547152509328
-elif level == 4:
-   bx = -3977.1424852867044
-   by = -3932.452859504728
-   
+
+#Speed
 global speed
 speed = 0
 #Lap Counter
@@ -215,6 +210,7 @@ Min = 0
 
 #---------Main Program Loop----------
 while carryOn:
+    print(a)
     # --- Main event loop ---
     for event in pygame.event.get(): # Player did something
         if event.type == pygame.QUIT: # Player clicked close button
@@ -286,16 +282,16 @@ while carryOn:
        screen.blit(text, (300, 15))
        
     elif level == 5:
-        if bx < -2560 and bx > -2570 and by > -2305 and by < -2020:
+        if bx < -3200 and bx > -3250 and by > -1860 and by < -1090:
             lap += 1
         screen.fill(WHITE)
         screen.blit(Oval_Track,(bx, by))
         print(bx, by, speed)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            player.rotLeft(5)          
+            player.rotLeft(3)          
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            player.rotRight(5)
+            player.rotRight(3)
         if keys[pygame.K_UP] or keys[pygame.K_w]:
            bx, by, speed = player.accelerate(bx, by, speed)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
@@ -317,8 +313,7 @@ while carryOn:
         screen.blit(text, (300, 1))
         font = pygame.font.SysFont('Segoe Print', 40)
         text = font.render(str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
-        screen.blit(text, (300, 15))
-       
+        screen.blit(text, (300, 15))       
     
         
     elif level == 6:
