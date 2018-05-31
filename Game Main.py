@@ -4,11 +4,13 @@
 import pygame, sys, random
 pygame.init()
 from buttonClass import Button
-from carClass import Player
+from carClass import Player, Car
 BackGround = pygame.image.load('Photos/lamborgini-egoista-36475.jpg')
 Road_Atlanta = pygame.image.load('Photos/Road_Atlanta.png')
 Oval_Track = pygame.image.load("Photos/Oval_Track.png")
+Oval_Track_Mini = pygame.image.load('Photos/Oval_Track_Mini.png')
 Nurburgring = pygame.image.load('Photos/Nurburgring.png')
+Nurburgring_Mini = pygame.image.load('Photos/Nurburgring_MiniMap.png')
 Blue_Car = pygame.image.load('Photos/Blue Car.png')
 Green_Car = pygame.image.load('Photos/Green Car.png')
 Smile_Car = pygame.image.load('Photos/Smile Car.png')
@@ -24,9 +26,11 @@ playlist.append ('Music/PnB Rock- Horses (Clean).mp3')
 playlist.append ('Music/Rick Astley - Never Gonna Give You Up (Video).mp3')
 playlist.append ('Music/Darude - Sandstorm.mp3')
 playlist.append ('Music/Legend Has It Clean - Run The Jewels.mp3')
+playlist.append('Music/Classical Gas [Mason Williams] - Songs - Tommy Emmanuel.mp3')
 
-Sound = pygame.mixer_music.load(playlist[random.randint(0,3)])
-pygame.mixer.music.play()
+#Sound = pygame.mixer_music.load(playlist[random.randint(0,6)])
+#Sound = pygame.mixer_music.load('Music/Classical Gas [Mason Williams] - Songs - Tommy Emmanuel.mp3')
+#pygame.mixer.music.play()
 
 music_playing = True
 
@@ -59,8 +63,12 @@ screen = pygame.display.set_mode(size)
 
 colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK, YELLOW)
 
+Mini_Map_Sprite = pygame.sprite.Group()
+miniCar = Car(RED, 5, 5)
+Mini_Map_Sprite.add(miniCar)
+
 all_sprites_list = pygame.sprite.Group()
-a = Green_Car
+a = Blue_Car
 player = Player(0, 0,  a)
 all_sprites_list.add(player)
 
@@ -200,7 +208,7 @@ by = 0
 global speed
 speed = 0
 #Lap Counter
-lap = 1
+lap = 0
 
 #Timer
 global miliSec, Sec, Min
@@ -210,7 +218,6 @@ Min = 0
 
 #---------Main Program Loop----------
 while carryOn:
-    print(a)
     # --- Main event loop ---
     for event in pygame.event.get(): # Player did something
         if event.type == pygame.QUIT: # Player clicked close button
@@ -246,25 +253,18 @@ while carryOn:
         screen.blit(text, (275, 1))
 
     elif level == 4:
+       #print(pygame.mouse.get_pos())
        if player.rect.x < -3900 and player.rect.y < -3940 and player.rect.y > 4144:
             lap += 1
-        #MOVE THE TRACK, NOT THE SPRITE!!
        screen.fill(WHITE)
        screen.blit(Nurburgring,(bx, by))
+       screen.blit(Nurburgring_Mini,(0, 0))
        print(bx, by, speed)
        keys = pygame.key.get_pressed()
        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-          player.rotLeft(2)           
+          player.rotLeft(9)
        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-          player.rotRight(2)
-       if keys[pygame.K_UP] or keys[pygame.K_w]:
-          bx, by = player.moveForward(bx, by)
-       if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-          bx, by = player.moveForward(bx, by)
-          player.rotLeft(6)          
-          player.rotLeft(10)          
-       if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-           player.rotRight(10)
+           player.rotRight(9)
        if keys[pygame.K_UP] or keys[pygame.K_w]:
           bx, by, speed = player.accelerate(bx, by, speed)
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
@@ -279,7 +279,9 @@ while carryOn:
        if Sec == 59:
           Min += 1
           Sec = 0
-       print(str(Min) + ':' + str(Sec) + ':' + str(miliSec)) 
+       print(str(Min) + ':' + str(Sec) + ':' + str(miliSec))
+       Mini_Map_Sprite.update(bx, by, level)
+       Mini_Map_Sprite.draw(screen)
        all_sprites_list.update()       
        all_sprites_list.draw(screen)
        font = pygame.font.SysFont('magneto', 40)
@@ -294,6 +296,7 @@ while carryOn:
             lap += 1
         screen.fill(WHITE)
         screen.blit(Oval_Track,(bx, by))
+        screen.blit(Oval_Track_Mini,(0, 0))
         print(bx, by, speed)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
@@ -344,6 +347,7 @@ while carryOn:
              
        all_sprites_list.update()       
        all_sprites_list.draw(screen)
+       
        font = pygame.font.SysFont('magneto', 40)
        text = font.render("Lap"+str(lap), 1, (WHITE))
        screen.blit(text, (300, 1))

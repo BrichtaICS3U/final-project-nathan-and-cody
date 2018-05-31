@@ -68,3 +68,32 @@ class Player(pygame.sprite.Sprite):
     def draw(self, screen):
         self.rect.center = (SCREENWIDTH/2, SCREENHEIGHT/2)
         screen.blit(self.image, self.rect)
+
+        
+class Car(pygame.sprite.Sprite): 
+    def __init__(self, color, width, height):
+        super().__init__() 
+
+        self.image = pygame.Surface([width, height])
+        self.image.fill(WHITE)
+        self.image.set_colorkey(WHITE)
+
+        self.width = width
+        self.height = height
+        self.color = color
+
+        pygame.draw.rect(self.image, self.color, [0, 0, self.width, self.height])
+
+        self.rect = self.image.get_rect()
+        
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)
+        
+    def update(self, bx, by, level):
+        if level == 4:
+            self.rect.x = -0.0271*bx+616
+            self.rect.y = -0.0278*by+330
+        elif level == 5:
+            print('BLA')
+        elif level == 6:
+            print('BLA')
