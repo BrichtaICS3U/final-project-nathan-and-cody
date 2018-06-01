@@ -7,6 +7,7 @@ from buttonClass import Button
 from carClass import Player, Car
 BackGround = pygame.image.load('Photos/lamborgini-egoista-36475.jpg')
 Road_Atlanta = pygame.image.load('Photos/Road_Atlanta.png')
+Road_Atlanta_Mini = pygame.image.load('Photos/Road_Atlanta_Mini.png')
 Oval_Track = pygame.image.load("Photos/Oval_Track.png")
 Oval_Track_Mini = pygame.image.load('Photos/Oval_Track_Mini.png')
 Nurburgring = pygame.image.load('Photos/Nurburgring.png')
@@ -94,7 +95,7 @@ def pink_car():
 
 def my_play_function():
    global level
-   level +=2
+   level = 7
 
 def my_track1_function():
     global level, bx, by
@@ -292,6 +293,7 @@ while carryOn:
        screen.blit(text, (300, 15))
        
     elif level == 5:
+        print(pygame.mouse.get_pos())
         if bx < -3200 and bx > -3250 and by > -1860 and by < -1090:
             lap += 1
         screen.fill(WHITE)
@@ -317,6 +319,8 @@ while carryOn:
         if Sec == 59:
            Min += 1
            Sec = 0
+        Mini_Map_Sprite.update(bx, by, level)
+        Mini_Map_Sprite.draw(screen) 
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
         font = pygame.font.SysFont('magneto', 40)
@@ -325,13 +329,14 @@ while carryOn:
         font = pygame.font.SysFont('Segoe Print', 40)
         text = font.render(str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
         screen.blit(text, (300, 15))       
-    
-        
+            
     elif level == 6:
+       print(pygame.mouse.get_pos())
        if bx < -2560 and bx > -2610 and by > -2305 and by < -2020:
           lap += 1
        screen.fill(WHITE)
        screen.blit(Road_Atlanta,(bx, by))
+       screen.blit(Road_Atlanta_Mini,(0, 0))
        print(bx, by, speed)
        keys = pygame.key.get_pressed()
        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
@@ -344,14 +349,6 @@ while carryOn:
            bx, by, speed = player.moveBackward(bx, by, speed)
        else:
           bx, by, speed = player.deccelerate(bx, by, speed)
-             
-       all_sprites_list.update()       
-       all_sprites_list.draw(screen)
-       
-       font = pygame.font.SysFont('magneto', 40)
-       text = font.render("Lap"+str(lap), 1, (WHITE))
-       screen.blit(text, (300, 1))
-
 
        miliSec += 1
        if miliSec == 16:
@@ -359,7 +356,9 @@ while carryOn:
           miliSec = 0
        if Sec == 59:
           Min += 1
-          Sec = 0             
+          Sec = 0
+       Mini_Map_Sprite.update(bx, by, level)
+       Mini_Map_Sprite.draw(screen)
        all_sprites_list.update()       
        all_sprites_list.draw(screen)
        font = pygame.font.SysFont('magneto', 40)
@@ -368,6 +367,17 @@ while carryOn:
        font = pygame.font.SysFont('Segoe Print', 40)
        text = font.render(str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
        screen.blit(text, (300, 15))
+
+    elif level == 7:
+       print(level)
+       font = pygame.font.SysFont('magneto', 40)
+       text = font.render("Instructions", 1, (WHITE))
+       screen.blit(text, (300, 1))
+       font = pygame.font.SysFont('arabic transparent', 24)
+       text = font.render("The point of the game is to race around a few tracks, some real, and others not", 1, (WHITE))
+       screen.blit(text, (100, 50))
+       
+      
 
     # Update the screen with queued shapes
     pygame.display.flip()

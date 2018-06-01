@@ -94,6 +94,8 @@ class Car(pygame.sprite.Sprite):
             self.rect.x = -0.0271*bx+616
             self.rect.y = -0.0278*by+330
         elif level == 5:
-            print('BLA')
+            self.rect.x = -0.0275*bx+603
+            self.rect.y = -0.0273*by+334
         elif level == 6:
-            print('BLA')
+            self.rect.x = -0.0337*bx+547
+            self.rect.y = -0.0341*by+292
