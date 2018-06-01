@@ -97,6 +97,10 @@ def my_play_function():
    global level
    level = 7
 
+def my_race_function():
+   global level
+   level = 3
+
 def my_track1_function():
     global level, bx, by
     level += 1
@@ -170,6 +174,10 @@ def mousebuttondown(level):
         for button in level3_buttons:
             if button.rect.collidepoint(pos):
                 button.call_back()
+    elif level == 7:
+       for button in level7_buttons:
+          if button.rect.collidepoint(pos):
+             button.call_back()
 
 level = 1
 carryOn = True
@@ -177,6 +185,7 @@ clock = pygame.time.Clock()
 
 #create button objects
 button_Play = Button("Race", (SCREENWIDTH/2, SCREENHEIGHT/4), GREY,my_play_function, DGREY)
+button_Race = Button("Let's GO", (500, 306), B_GREEN, my_race_function, GREEN)
 button_Previous = Button("Previous", (SCREENWIDTH/2, SCREENHEIGHT*9/10), GREY, my_previous_function, DGREY)
 button_Quit = Button("Quit", (SCREENWIDTH/2, SCREENHEIGHT*3/4), GREY, my_quit_function, DGREY)
 
@@ -200,6 +209,7 @@ button_trackThree = Button("Track Three",  (SCREENWIDTH*2/3, SCREENHEIGHT/2), GR
 level1_buttons = [button_Settings, button_Play, button_Quit]
 level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_colourBLUE, button_colourORANGE, button_colourGREEN, button_colourSmile, button_songchange,button_colourchange]
 level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
+level7_buttons = [button_Race]
 
 #Background Coordinates
 bx = 0
@@ -247,6 +257,7 @@ while carryOn:
         for button in level2_buttons:
             button.draw()
     elif level == 3:
+        print(level)
         for button in level3_buttons:
             button.draw()
         font = pygame.font.SysFont('magneto', 40)
@@ -376,6 +387,26 @@ while carryOn:
        font = pygame.font.SysFont('arabic transparent', 24)
        text = font.render("The point of the game is to race around a few tracks, some real, and others not", 1, (WHITE))
        screen.blit(text, (100, 50))
+       font = pygame.font.SysFont('arabic transparent', 24)
+       text = font.render("and try to get the best times of 3 laps", 1, (WHITE))
+       screen.blit(text, (100, 70))
+       font = pygame.font.SysFont('arabic transparent', 24)
+       text = font.render("To play you use WSAD or the Arrows", 1, (WHITE))
+       screen.blit(text, (100, 100))
+       font = pygame.font.SysFont('arabic transparent', 24)
+       text = font.render("W/ Up Arrow = Accelerate", 1, (WHITE))
+       screen.blit(text, (100, 140))
+       font = pygame.font.SysFont('arabic transparent', 24)
+       text = font.render("S/ Down Arrow = Stop and move backward", 1, (WHITE))
+       screen.blit(text, (100, 160))
+       font = pygame.font.SysFont('arabic transparent', 24)
+       text = font.render("A/ Left Arrow = Turn Left", 1, (WHITE))
+       screen.blit(text, (100, 180))
+       font = pygame.font.SysFont('arabic transparent', 24)
+       text = font.render("D/ Right Arrow = Turn Right", 1, (WHITE))
+       screen.blit(text, (100, 200))
+       for button in level7_buttons:
+            button.draw()
        
       
 
