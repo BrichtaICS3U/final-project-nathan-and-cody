@@ -242,22 +242,23 @@ while carryOn:
 
     # Cl ear the screen to white
     screen.fill(WHITE)
-    screen.blit(BackGround,(0,0))
     # Draw buttons/  
     if level == 1:
+        screen.blit(BackGround,(0,0))
         for button in level1_buttons:
             button.draw()
         font = pygame.font.SysFont('magneto', 75)
         text = font.render("Top Speed", 1, (WHITE))
         screen.blit(text, (190, 1))
     elif level == 2:
+        screen.blit(BackGround,(0,0))
         font = pygame.font.SysFont('magneto', 40)
         text = font.render("Sound", 1, (WHITE))
         screen.blit(text, (330, 1))
         for button in level2_buttons:
             button.draw()
     elif level == 3:
-        print(level)
+        screen.blit(BackGround,(0,0))
         for button in level3_buttons:
             button.draw()
         font = pygame.font.SysFont('magneto', 40)
@@ -380,7 +381,7 @@ while carryOn:
        screen.blit(text, (300, 15))
 
     elif level == 7:
-       print(level)
+       screen.blit(BackGround,(0,0))
        font = pygame.font.SysFont('magneto', 40)
        text = font.render("Instructions", 1, (WHITE))
        screen.blit(text, (300, 1))
@@ -391,7 +392,7 @@ while carryOn:
        text = font.render("and try to get the best times of 3 laps", 1, (WHITE))
        screen.blit(text, (100, 70))
        font = pygame.font.SysFont('arabic transparent', 24)
-       text = font.render("To play you use WSAD or the Arrows", 1, (WHITE))
+       text = font.render("To play you use WSAD or the Arrow Keys", 1, (WHITE))
        screen.blit(text, (100, 100))
        font = pygame.font.SysFont('arabic transparent', 24)
        text = font.render("W/ Up Arrow = Accelerate", 1, (WHITE))
