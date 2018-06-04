@@ -69,29 +69,29 @@ miniCar = Car(RED, 5, 5)
 Mini_Map_Sprite.add(miniCar)
 
 all_sprites_list = pygame.sprite.Group()
-a = Blue_Car
-player = Player(0, 0,  a)
+image = Blue_Car
+player = Player(0, 0,  image)
 all_sprites_list.add(player)
 
 def blue_car():
-   global a
-   a = car_list[0]
+   player.image = Blue_Car
+   player.original = Blue_car
 
 def green_car():
-   global a
-   a = car_list[1]
+   player.image = Green_Car
+   player.original = Green_Car
 
 def orange_car():
-   global a
-   a = Orange_Car
+   player.image = Orange_Car
+   player.original = Orange_Car
 
 def red_car():
-   global a
-   a = Red_Car
+   player.image = Red_Car
+   player.original = Red_Car
 
 def pink_car():
-   global a
-   a = Pink_Car
+   player.image = Pink_Car
+   player.original = Pink_Car
 
 def my_play_function():
    global level
@@ -267,7 +267,7 @@ while carryOn:
 
     elif level == 4:
        #print(pygame.mouse.get_pos())
-       if player.rect.x < -3900 and player.rect.y < -3940 and player.rect.y > 4144:
+       if player.rect.x < -3900 and player.rect.y < -3940 and player.rect.y > -4144:
             lap += 1
        screen.fill(WHITE)
        screen.blit(Nurburgring,(bx, by))
