@@ -18,7 +18,6 @@ Smile_Car = pygame.image.load('Photos/Smile Car.png')
 Orange_Car = pygame.image.load('Photos/Orange Car.png')
 Pink_Car = pygame.image.load("Photos/Pink Car.png")
 Red_Car = pygame.image.load("Photos/Red Car.png")
-car_list = [Blue_Car, Green_Car, Red_Car, Orange_Car, Pink_Car]
 
 playlist = []
 playlist.append ('Music/Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
@@ -102,22 +101,33 @@ def my_race_function():
    level = 3
 
 def my_track1_function():
-    global level, bx, by
+    global level, bx, by, miliSec, Sec, Min
     level += 1
-    bx = -342.9954700861159
-    by = -3130.942299098437
+    bx = -291.26694934954867
+    by = -3349.390480728794
+    player.rotLeft(90)
+    miliSec = 0
+    Sec = 0
+    Min = 0
     
 def my_track2_function():
-    global level, bx, by
+    global level, bx, by, speed, miliSec
     level += 2
-    bx = -3171.2869853157113
-    by = -1446.547152509328
+    bx = -1132.7936704725912
+    by = -1983.3962939071591
+    speed = 40
+    miliSec = 0
+    Sec = 0
+    Min = 0
 
 def my_track3_function():
-    global level, bx, by
+    global level, bx, by, miliSec
     level += 3
-    bx = -5737.784349516841
-    by = -4844.161228507984
+    bx = -2040.9458062023593
+    by = -2160.2446692390226
+    miliSec = 0
+    Sec = 0
+    Min = 0
    
 def my_sound_function():
     print('Sound')
@@ -137,7 +147,10 @@ def my_previous_function():
         level -= 1
     elif level == 3:
         level -=2
-
+def Main_Menu():
+   global level
+   level = 1
+   
 def my_on_function():
    global music_playing
    if music_playing == False:
@@ -178,6 +191,11 @@ def mousebuttondown(level):
        for button in level7_buttons:
           if button.rect.collidepoint(pos):
              button.call_back()
+             
+    elif level == 8:
+       for button in level8_buttons:
+          if button.rect.collidepoint(pos):
+             button.call_back()
 
 level = 1
 carryOn = True
@@ -188,6 +206,7 @@ button_Play = Button("Race", (SCREENWIDTH/2, SCREENHEIGHT/4), GREY,my_play_funct
 button_Race = Button("Let's GO", (500, 306), B_GREEN, my_race_function, GREEN)
 button_Previous = Button("Previous", (SCREENWIDTH/2, SCREENHEIGHT*9/10), GREY, my_previous_function, DGREY)
 button_Quit = Button("Quit", (SCREENWIDTH/2, SCREENHEIGHT*3/4), GREY, my_quit_function, DGREY)
+button_Main = Button("Main Menu", (SCREENWIDTH/2, SCREENHEIGHT*9/10), RED, Main_Menu, BLOOD)
 
 button_Settings = Button("Settings", (SCREENWIDTH/2, SCREENHEIGHT/2), GREY, my_settings_function, DGREY)
 button_On = Button("ON", (SCREENWIDTH/4, SCREENHEIGHT/6), B_GREEN, my_on_function, GREEN)
@@ -207,9 +226,10 @@ button_trackThree = Button("Track Three",  (SCREENWIDTH*2/3, SCREENHEIGHT/2), GR
 
 #arrange button groups depending on level
 level1_buttons = [button_Settings, button_Play, button_Quit]
-level2_buttons = [button_Previous,button_On, button_Off, button_colourRED, button_colourBLUE, button_colourORANGE, button_colourGREEN, button_colourSmile, button_songchange,button_colourchange]
+level2_buttons = [button_Previous, button_On, button_Off, button_colourRED, button_colourBLUE, button_colourORANGE, button_colourGREEN, button_colourSmile, button_colourchange]
 level3_buttons = [button_trackOne, button_trackTwo, button_trackThree, button_Previous]
 level7_buttons = [button_Race]
+level8_buttons = [button_Race, button_Main]
 
 #Background Coordinates
 bx = 0
@@ -267,7 +287,7 @@ while carryOn:
 
     elif level == 4:
        #print(pygame.mouse.get_pos())
-       if player.rect.x < -3900 and player.rect.y < -3940 and player.rect.y > -4144:
+       if bx < -128 and bx > -469 and by < -3110 and by > -3120:
             lap += 1
        screen.fill(WHITE)
        screen.blit(Nurburgring,(bx, by))
@@ -284,6 +304,9 @@ while carryOn:
            bx, by, speed = player.moveBackward(bx, by, speed)
        else:
            bx, by, speed = player.deccelerate(bx, by, speed)
+           
+       if lap == 3:
+          level = 8
 
        miliSec += 1
        if miliSec == 16:
@@ -298,11 +321,11 @@ while carryOn:
        all_sprites_list.update()       
        all_sprites_list.draw(screen)
        font = pygame.font.SysFont('magneto', 40)
-       text = font.render("Lap"+str(lap), 1, (WHITE))
+       text = font.render("Lap:"+str(lap)+"/2", 1, (WHITE))
        screen.blit(text, (300, 1))
-       font = pygame.font.SysFont('Segoe Print', 40)
+       font = pygame.font.SysFont('arabic transparent', 40)
        text = font.render(str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
-       screen.blit(text, (300, 15))
+       screen.blit(text, (350, 45))
        
     elif level == 5:
         print(pygame.mouse.get_pos())
@@ -321,6 +344,8 @@ while carryOn:
            bx, by, speed = player.accelerate(bx, by, speed)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             bx, by, speed = player.moveBackward(bx, by, speed)
+        if keys[pygame.K_LSHIFT]:
+           speed = 70
         else:
             bx, by, speed = player.deccelerate(bx, by, speed)
 
@@ -331,16 +356,18 @@ while carryOn:
         if Sec == 59:
            Min += 1
            Sec = 0
+        if lap == 11:
+            level = 8
         Mini_Map_Sprite.update(bx, by, level)
         Mini_Map_Sprite.draw(screen) 
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
         font = pygame.font.SysFont('magneto', 40)
-        text = font.render("Lap"+str(lap), 1, (WHITE))
+        text = font.render("Lap:"+str(lap)+"/10", 1, (WHITE))
         screen.blit(text, (300, 1))
-        font = pygame.font.SysFont('Segoe Print', 40)
+        font = pygame.font.SysFont('arabic transparent', 40)
         text = font.render(str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
-        screen.blit(text, (300, 15))       
+        screen.blit(text, (350, 45))       
             
     elif level == 6:
        print(pygame.mouse.get_pos())
@@ -359,6 +386,8 @@ while carryOn:
           bx, by, speed = player.accelerate(bx, by, speed)
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
            bx, by, speed = player.moveBackward(bx, by, speed)
+       if keys[pygame.K_LSHIFT]:
+           speed = 40
        else:
           bx, by, speed = player.deccelerate(bx, by, speed)
 
@@ -369,16 +398,18 @@ while carryOn:
        if Sec == 59:
           Min += 1
           Sec = 0
+       if lap == 4:
+          level = 8
        Mini_Map_Sprite.update(bx, by, level)
        Mini_Map_Sprite.draw(screen)
        all_sprites_list.update()       
        all_sprites_list.draw(screen)
        font = pygame.font.SysFont('magneto', 40)
-       text = font.render("Lap"+str(lap), 1, (WHITE))
+       text = font.render("Lap:"+str(lap)+"/3", 1, (WHITE))
        screen.blit(text, (300, 1))
-       font = pygame.font.SysFont('Segoe Print', 40)
+       font = pygame.font.SysFont('arabic transparent', 40)
        text = font.render(str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
-       screen.blit(text, (300, 15))
+       screen.blit(text, (350, 45))
 
     elif level == 7:
        screen.blit(BackGround,(0,0))
@@ -406,11 +437,23 @@ while carryOn:
        font = pygame.font.SysFont('arabic transparent', 24)
        text = font.render("D/ Right Arrow = Turn Right", 1, (WHITE))
        screen.blit(text, (100, 200))
+       font = pygame.font.SysFont('arabic transparent', 24)
+       text = font.render("Left Shift = Boost **Not on track 1**", 1, (WHITE))
+       screen.blit(text, (100, 200))
        for button in level7_buttons:
             button.draw()
-       
-      
 
+    elif level == 8:
+       screen.blit(BackGround,(0,0))
+       font = pygame.font.SysFont('magneto', 60)
+       text = font.render("Your time was:"+str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
+       screen.blit(text, (50, 1))
+       font = pygame.font.SysFont('arabic transparent', 40)
+       text = font.render("Are you able to beat your time????", 1, (WHITE))
+       screen.blit(text, (100, 70))
+       for button in level8_buttons:
+            button.draw()
+      
     # Update the screen with queued shapes
     pygame.display.flip()
 

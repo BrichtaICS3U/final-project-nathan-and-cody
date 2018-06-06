@@ -45,7 +45,7 @@ class Player(pygame.sprite.Sprite):
         return bx, by, speed
     
     def accelerate(self, bx, by, speed):
-        speed +=1
+        speed += 1
         bx -= math.cos(math.radians(self.angle))*speed
         by += math.sin(math.radians(self.angle))*speed
         return bx, by, speed
