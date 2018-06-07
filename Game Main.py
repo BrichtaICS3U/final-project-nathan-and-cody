@@ -28,9 +28,9 @@ playlist.append ('Music/Darude - Sandstorm.mp3')
 playlist.append ('Music/Legend Has It Clean - Run The Jewels.mp3')
 playlist.append('Music/Classical Gas [Mason Williams] - Songs - Tommy Emmanuel.mp3')
 
-#Sound = pygame.mixer_music.load(playlist[random.randint(0,6)])
+Sound = pygame.mixer_music.load(playlist[random.randint(0,6)])
 #Sound = pygame.mixer_music.load('Music/Classical Gas [Mason Williams] - Songs - Tommy Emmanuel.mp3')
-#pygame.mixer.music.play()
+pygame.mixer.music.play()
 
 music_playing = True
 
@@ -302,6 +302,11 @@ while carryOn:
           bx, by, speed = player.accelerate(bx, by, speed)
        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
            bx, by, speed = player.moveBackward(bx, by, speed)
+       if keys[pygame.K_ESCAPE]:
+          level = 3
+          miliSec = 0
+          Sec = 0
+          Min = 0
        else:
            bx, by, speed = player.deccelerate(bx, by, speed)
            
@@ -345,7 +350,12 @@ while carryOn:
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             bx, by, speed = player.moveBackward(bx, by, speed)
         if keys[pygame.K_LSHIFT]:
-           speed = 70
+           speed = 60
+        if keys[pygame.K_ESCAPE]:
+          level = 3
+          miliSec = 0
+          Sec = 0
+          Min = 0
         else:
             bx, by, speed = player.deccelerate(bx, by, speed)
 
@@ -388,6 +398,11 @@ while carryOn:
            bx, by, speed = player.moveBackward(bx, by, speed)
        if keys[pygame.K_LSHIFT]:
            speed = 40
+       if keys[pygame.K_ESCAPE]:
+          level = 3
+          miliSec = 0
+          Sec = 0
+          Min = 0
        else:
           bx, by, speed = player.deccelerate(bx, by, speed)
 
@@ -439,7 +454,10 @@ while carryOn:
        screen.blit(text, (100, 200))
        font = pygame.font.SysFont('arabic transparent', 24)
        text = font.render("Left Shift = Boost **Not on track 1**", 1, (WHITE))
-       screen.blit(text, (100, 200))
+       screen.blit(text, (100, 220))
+       font = pygame.font.SysFont('arabic transparent', 24)
+       text = font.render("ESCAPE is to go back to track select", 1, (WHITE))
+       screen.blit(text, (100, 240))
        for button in level7_buttons:
             button.draw()
 
@@ -450,7 +468,7 @@ while carryOn:
        screen.blit(text, (50, 1))
        font = pygame.font.SysFont('arabic transparent', 40)
        text = font.render("Are you able to beat your time????", 1, (WHITE))
-       screen.blit(text, (100, 70))
+       screen.blit(text, (150, 70))
        for button in level8_buttons:
             button.draw()
       
