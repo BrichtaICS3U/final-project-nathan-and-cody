@@ -34,7 +34,7 @@ class Button():
         self.color = bg  # the static (normal) color
         self.bg = bg  # actual background color, can change on mouseover
         self.fg = fg  # text color
-        self.ac = ac
+        self.ac = ac #acive colour
         self.size = size
 
         self.font = pygame.font.SysFont(font_name, font_size)

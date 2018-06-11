@@ -5,6 +5,7 @@ import pygame, sys, random
 pygame.init()
 from buttonClass import Button
 from carClass import Player, Car
+#Maps
 BackGround = pygame.image.load('Photos/lamborgini-egoista-36475.jpg')
 Road_Atlanta = pygame.image.load('Photos/Road_Atlanta.png')
 Road_Atlanta_Mini = pygame.image.load('Photos/Road_Atlanta_Mini.png')
@@ -12,6 +13,7 @@ Oval_Track = pygame.image.load("Photos/Oval_Track.png")
 Oval_Track_Mini = pygame.image.load('Photos/Oval_Track_Mini.png')
 Nurburgring = pygame.image.load('Photos/Nurburgring.png')
 Nurburgring_Mini = pygame.image.load('Photos/Nurburgring_MiniMap.png')
+#Cars
 Blue_Car = pygame.image.load('Photos/Blue Car.png')
 Green_Car = pygame.image.load('Photos/Green Car.png')
 Smile_Car = pygame.image.load('Photos/Smile Car.png')
@@ -19,6 +21,7 @@ Orange_Car = pygame.image.load('Photos/Orange Car.png')
 Pink_Car = pygame.image.load("Photos/Pink Car.png")
 Red_Car = pygame.image.load("Photos/Red Car.png")
 
+#music
 playlist = []
 playlist.append ('Music/Dragonball Super - Ultra Instinct Rush (HQ Recreation).mp3')
 playlist.append ('Music/Lil Uzi Vert Ft. Quavo & Travis Scott- Go Off (Clean) (1).mp3')
@@ -27,9 +30,9 @@ playlist.append ('Music/Rick Astley - Never Gonna Give You Up (Video).mp3')
 playlist.append ('Music/Darude - Sandstorm.mp3')
 playlist.append ('Music/Legend Has It Clean - Run The Jewels.mp3')
 playlist.append('Music/Classical Gas [Mason Williams] - Songs - Tommy Emmanuel.mp3')
+playlist.append('Music/Tokyo Drift - Teriyaki Boyz [ MUSIC VIDEO ] HD.mp3')
 
-Sound = pygame.mixer_music.load(playlist[random.randint(0,6)])
-#Sound = pygame.mixer_music.load('Music/Classical Gas [Mason Williams] - Songs - Tommy Emmanuel.mp3')
+Sound = pygame.mixer_music.load(playlist[random.randint(0,7)])
 pygame.mixer.music.play()
 
 music_playing = True
@@ -63,10 +66,12 @@ screen = pygame.display.set_mode(size)
 
 colourList = (RED, BLUE, NEON, VIOLET, BLOOD, PINK, YELLOW)
 
+#Mini map sprite
 Mini_Map_Sprite = pygame.sprite.Group()
 miniCar = Car(RED, 5, 5)
 Mini_Map_Sprite.add(miniCar)
 
+#player sprite
 all_sprites_list = pygame.sprite.Group()
 image = Blue_Car
 player = Player(0, 0,  image)
@@ -286,7 +291,7 @@ while carryOn:
         screen.blit(text, (275, 1))
 
     elif level == 4:
-       #print(pygame.mouse.get_pos())
+       #Lap
        if bx < -128 and bx > -469 and by < -3110 and by > -3120:
             lap += 1
        screen.fill(WHITE)
@@ -312,7 +317,7 @@ while carryOn:
            
        if lap == 3:
           level = 8
-
+#Timer
        miliSec += 1
        if miliSec == 16:
           Sec += 1
@@ -325,14 +330,17 @@ while carryOn:
        Mini_Map_Sprite.draw(screen)
        all_sprites_list.update()       
        all_sprites_list.draw(screen)
+       #Lap Print
        font = pygame.font.SysFont('magneto', 40)
        text = font.render("Lap:"+str(lap)+"/2", 1, (WHITE))
        screen.blit(text, (300, 1))
+       #Time Print
        font = pygame.font.SysFont('arabic transparent', 40)
        text = font.render(str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
        screen.blit(text, (350, 45))
        
     elif level == 5:
+       #Lap
         print(pygame.mouse.get_pos())
         if bx < -3200 and bx > -3250 and by > -1860 and by < -1090:
             lap += 1
@@ -358,7 +366,7 @@ while carryOn:
           Min = 0
         else:
             bx, by, speed = player.deccelerate(bx, by, speed)
-
+#timer 
         miliSec += 1
         if miliSec == 16:
            Sec += 1
@@ -372,14 +380,17 @@ while carryOn:
         Mini_Map_Sprite.draw(screen) 
         all_sprites_list.update()       
         all_sprites_list.draw(screen)
+        #Lap Print
         font = pygame.font.SysFont('magneto', 40)
         text = font.render("Lap:"+str(lap)+"/10", 1, (WHITE))
         screen.blit(text, (300, 1))
+        #Timer Print
         font = pygame.font.SysFont('arabic transparent', 40)
         text = font.render(str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
         screen.blit(text, (350, 45))       
             
     elif level == 6:
+       #Lap
        print(pygame.mouse.get_pos())
        if bx < -2560 and bx > -2610 and by > -2305 and by < -2020:
           lap += 1
@@ -406,6 +417,7 @@ while carryOn:
        else:
           bx, by, speed = player.deccelerate(bx, by, speed)
 
+#Timer
        miliSec += 1
        if miliSec == 16:
           Sec += 1
@@ -419,14 +431,17 @@ while carryOn:
        Mini_Map_Sprite.draw(screen)
        all_sprites_list.update()       
        all_sprites_list.draw(screen)
+       #Lap Print
        font = pygame.font.SysFont('magneto', 40)
        text = font.render("Lap:"+str(lap)+"/3", 1, (WHITE))
        screen.blit(text, (300, 1))
+       #Timer Print
        font = pygame.font.SysFont('arabic transparent', 40)
        text = font.render(str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))
        screen.blit(text, (350, 45))
 
     elif level == 7:
+       #Instructions
        screen.blit(BackGround,(0,0))
        font = pygame.font.SysFont('magneto', 40)
        text = font.render("Instructions", 1, (WHITE))
@@ -461,7 +476,9 @@ while carryOn:
        for button in level7_buttons:
             button.draw()
 
-    elif level == 8:
+
+   elif level == 8:
+      #Final Screen
        screen.blit(BackGround,(0,0))
        font = pygame.font.SysFont('magneto', 60)
        text = font.render("Your time was:"+str(Min) + ':' + str(Sec) + ':' + str(miliSec), 1, (WHITE))

@@ -6,6 +6,7 @@ BLACK = (0, 0, 0)
 SCREENWIDTH = 800
 SCREENHEIGHT = 507
 
+#Player Spite
 class Player(pygame.sprite.Sprite):
 
     def __init__(self, startangle, speed, image):
@@ -69,7 +70,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (SCREENWIDTH/2, SCREENHEIGHT/2)
         screen.blit(self.image, self.rect)
 
-        
+#Mini Map Sprite
 class Car(pygame.sprite.Sprite): 
     def __init__(self, color, width, height):
         super().__init__() 
